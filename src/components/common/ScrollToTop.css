@@ -1,0 +1,268 @@
+/* Scroll to Top Button Styles */
+.scroll-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 10000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-btn {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  transform: scale(0);
+  animation: scaleIn 0.4s ease-out forwards;
+}
+
+.scroll-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 35px rgba(39, 174, 96, 0.4);
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+}
+
+.scroll-btn:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 6px 20px rgba(39, 174, 96, 0.35);
+}
+
+.scroll-icon {
+  font-size: 20px;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  z-index: 2;
+  position: relative;
+}
+
+.scroll-btn:hover .scroll-icon {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Ripple Effect */
+.scroll-ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.6s ease;
+  z-index: 1;
+}
+
+.scroll-btn:hover .scroll-ripple {
+  width: 120px;
+  height: 120px;
+  opacity: 0;
+}
+
+/* Floating Animation */
+@keyframes scaleIn {
+  0% {
+    transform: scale(0) rotate(180deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) rotate(90deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.scroll-btn {
+  animation: scaleIn 0.4s ease-out forwards, float 3s ease-in-out infinite 0.5s;
+}
+
+/* Pulse Effect */
+.scroll-btn::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .scroll-to-top {
+    bottom: 25px;
+    right: 25px;
+  }
+  
+  .scroll-btn {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .scroll-icon {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .scroll-to-top {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .scroll-btn {
+    width: 50px;
+    height: 50px;
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3);
+  }
+  
+  .scroll-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
+  }
+  
+  .scroll-icon {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-to-top {
+    bottom: 15px;
+    right: 15px;
+  }
+  
+  .scroll-btn {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .scroll-icon {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 375px) {
+  .scroll-to-top {
+    bottom: 12px;
+    right: 12px;
+  }
+  
+  .scroll-btn {
+    width: 42px;
+    height: 42px;
+  }
+  
+  .scroll-icon {
+    font-size: 13px;
+  }
+}
+
+/* Touch Devices */
+@media (hover: none) and (pointer: coarse) {
+  .scroll-btn:hover {
+    transform: none;
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+  }
+  
+  .scroll-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+  }
+  
+  .scroll-btn:hover .scroll-icon {
+    transform: none;
+    filter: none;
+  }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .scroll-btn {
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.25);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-btn {
+    animation: none !important;
+    transition: none;
+  }
+  
+  .scroll-btn::before {
+    animation: none !important;
+  }
+  
+  .scroll-ripple {
+    transition: none;
+  }
+  
+  .scroll-btn:hover {
+    transform: none;
+  }
+  
+  .scroll-btn:hover .scroll-icon {
+    transform: none;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .scroll-btn {
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
+  }
+  
+  .scroll-btn:hover {
+    box-shadow: 0 12px 35px rgba(39, 174, 96, 0.5);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .scroll-to-top {
+    display: none !important;
+  }
+} 

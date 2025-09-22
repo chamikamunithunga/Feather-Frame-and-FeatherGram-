@@ -1,0 +1,273 @@
+.team .box {
+  background: 
+    url('/images/66460.jpg') center/cover no-repeat,
+    rgb(255, 255, 255);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: clamp(25px, 5vw, 35px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: clamp(2rem, 4vw, 2.5rem);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 clamp(8px, 3vw, 15px) clamp(30px, 6vw, 50px) rgba(0, 0, 0, 0.1);
+  height: auto;
+  min-height: clamp(200px, 25vw, 250px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: clamp(2rem, 4vw, 2.5rem);
+  max-width: clamp(280px, 32vw, 350px);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  color: #20bc64;
+}
+
+.team .box:hover {
+  background: 
+    url('/images/66460.jpg') center/cover no-repeat,
+    rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  color: #fff;
+  box-shadow: 0 clamp(8px, 3vw, 15px) clamp(30px, 6vw, 50px) rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.team .details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  width: 100%;
+}
+
+.team .img {
+  width: clamp(120px, 20vw, 160px);
+  height: clamp(120px, 20vw, 160px);
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 8px 15px rgba(39, 174, 96, 0.25));
+}
+
+.team .box:hover .img {
+  transform: scale(1.08) rotate(3deg);
+  filter: drop-shadow(0 6px 12px rgba(39, 174, 96, 0.3));
+}
+
+.team img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 5px solid rgba(39, 174, 96, 0.2);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.9);
+}
+
+.team .box:hover img {
+  transform: scale(1.05) rotate(-3deg);
+  border-color: rgba(39, 174, 96, 0.3);
+  box-shadow: 0 0 0 4px rgba(39, 174, 96, 0.1);
+}
+
+.team h4 {
+  font-size: clamp(1.4rem, 4vw, 1.9rem);
+  font-weight: 800;
+  color: #000000;
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.team .location-line {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  color: #000000;
+  font-weight: 600;
+  margin: 0.2em 0 0.7em 0;
+  letter-spacing: 0.2px;
+  text-align: center;
+}
+
+.team .whatsapp-btn {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  border: none;
+  border-radius: clamp(12px, 3vw, 18px);
+  padding: clamp(12px, 3vw, 16px) clamp(20px, 4vw, 28px);
+  color: white;
+  font-weight: 700;
+  font-size: clamp(14px, 3vw, 16px);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 2vw, 10px);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  min-width: clamp(120px, 20vw, 150px);
+  justify-content: center;
+}
+
+.team .whatsapp-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  background: linear-gradient(135deg, #128C7E 0%, #25D366 100%);
+}
+
+.team .whatsapp-btn i {
+  font-size: clamp(18px, 4vw, 22px);
+  margin-right: clamp(6px, 1.5vw, 8px);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.team .whatsapp-btn:hover i {
+  transform: scale(1.1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.team.background {
+  background: url('./images/bgff.jpeg') center/cover no-repeat;
+  position: relative;
+  overflow: hidden;
+  padding: clamp(3rem, 6vw, 5rem) 0;
+}
+
+.team.background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, 
+    rgba(39, 174, 96, 0.1) 0%, 
+    rgba(46, 204, 113, 0.05) 50%, 
+    rgba(133, 224, 163, 0.1) 100%
+  );
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease-in-out infinite;
+}
+
+@keyframes gradientFlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+}
+
+.team {
+  position: relative;
+}
+
+.team .container {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 4vw, 3rem);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 3vw, 2rem);
+  position: relative;
+  z-index: 2;
+}
+
+.team .heading {
+  text-align: center;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.team .heading h1 {
+  color: #ffffff;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 800;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+  letter-spacing: 1px;
+}
+
+.team .heading p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .team.background {
+    background-attachment: scroll;
+  }
+  
+  .team .box {
+    max-width: clamp(300px, 85vw, 400px);
+    padding: clamp(1.5rem, 4vw, 2rem);
+    min-height: clamp(280px, 35vw, 320px);
+  }
+  
+  .team .img {
+    width: clamp(110px, 22vw, 140px);
+    height: clamp(110px, 22vw, 140px);
+  }
+  
+  .team h4 {
+    font-size: clamp(1.3rem, 5vw, 1.7rem);
+  }
+  
+  .team .whatsapp-btn {
+    font-size: clamp(13px, 3vw, 15px);
+    padding: clamp(10px, 2.5vw, 14px) clamp(18px, 4vw, 24px);
+    min-width: clamp(110px, 18vw, 140px);
+  }
+  
+  .team .whatsapp-btn i {
+    font-size: clamp(15px, 3vw, 18px);
+  }
+}
+
+@media (max-width: 480px) {
+  .team .box {
+    max-width: clamp(280px, 85vw, 320px);
+    padding: clamp(1.5rem, 3vw, 1.8rem);
+    min-height: clamp(250px, 30vw, 280px);
+  }
+  
+  .team .img {
+    width: clamp(100px, 20vw, 120px);
+    height: clamp(100px, 20vw, 120px);
+  }
+  
+  .team h4 {
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+  }
+  
+  .team .whatsapp-btn {
+    font-size: clamp(12px, 2.8vw, 14px);
+    padding: clamp(8px, 2vw, 12px) clamp(16px, 3.5vw, 20px);
+    min-width: clamp(100px, 16vw, 120px);
+  }
+}

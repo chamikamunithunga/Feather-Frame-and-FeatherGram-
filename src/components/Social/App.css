@@ -1,0 +1,540 @@
+.social-app * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.social-app {
+  --primary-color: #399918;
+  --primary-color-dark: #2d7a13;
+  --primary-rgb: 57, 153, 24;
+  --bg-light: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-hover: #f1f5f9;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+  --border-light: #e2e8f0;
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-medium: rgba(0, 0, 0, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+/* Dark Mode Variables */
+.social-app.theme-dark,
+.social-app.theme-system.theme-dark-resolved {
+  --primary-color: #4ade80;
+  --primary-color-dark: #22c55e;
+  --primary-rgb: 74, 222, 128;
+  --bg-light: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-hover: #334155;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --border-color: #334155;
+  --border-light: #475569;
+  --shadow-light: rgba(0, 0, 0, 0.3);
+  --shadow-medium: rgba(0, 0, 0, 0.4);
+  --glass-bg: rgba(15, 23, 42, 0.8);
+  --glass-border: rgba(74, 222, 128, 0.2);
+}
+
+/* Main Social Media App Container with Two-Tone Greeny-Blue Background */
+.social-app {
+  --primary-color: #399918;
+  --primary-color-dark: #2d7a12;
+  --primary-color-rgb: 57, 153, 24;
+  --secondary-color: #008cff;
+  --secondary-color-rgb: 0, 140, 255;
+  --accent-color: #58f193;
+  --accent-color-rgb: 88, 241, 147;
+  
+  /* 🌿🌊 Two-Tone Greeny-Blue Mixed Variables 🌊🌿 */
+  --bg-primary: #e6ffd6;
+  --bg-secondary: #d1f2d1;
+  --bg-tertiary: #b3e6ff;
+  --bg-quaternary: #99d6ff;
+  --bg-mixed: #c7f0d6;
+  --bg-gradient-1: #e6ffd6;
+  --bg-gradient-2: #b3e6ff;
+  --bg-gradient-3: #99d6ff;
+  --bg-gradient-4: #c7f0d6;
+  
+  /* Mixed Green-Blue Borders and Shadows */
+  --mixed-border: rgba(88, 241, 147, 0.4);
+  --mixed-shadow: rgba(0, 140, 255, 0.15);
+  --mixed-hover: rgba(88, 241, 147, 0.2);
+  
+  /* Text Colors for Mixed Background */
+  --text-primary: #1a1a1a;
+  --text-secondary: #2d5a3d;
+  --text-accent: #0066cc;
+  
+  /* Card and Component Backgrounds */
+  --bg-light: #f0f9f0;
+  --bg-card: #ffffff;
+  --bg-secondary-light: #e8f5e8;
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(88, 241, 147, 0.3);
+  --glass-shadow: rgba(0, 140, 255, 0.1);
+  
+  /* Shadow and Effect Variables */
+  --shadow-light: 0 2px 12px rgba(88, 241, 147, 0.1);
+  --shadow-medium: 0 4px 20px rgba(0, 140, 255, 0.15);
+  --shadow-heavy: 0 8px 32px rgba(88, 241, 147, 0.2);
+  
+  min-height: 100vh;
+  background: linear-gradient(135deg, 
+    var(--bg-gradient-1) 0%, 
+    var(--bg-gradient-4) 25%, 
+    var(--bg-gradient-2) 50%, 
+    var(--bg-gradient-3) 75%, 
+    var(--bg-gradient-4) 100%);
+  background-attachment: fixed;
+  position: relative;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Upper White Space - Blue-Green Mixed Two-Tone */
+.social-app::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(135deg, 
+    rgba(0, 140, 255, 0.9) 0%, 
+    rgba(88, 241, 147, 0.8) 25%, 
+    rgba(0, 140, 255, 0.7) 50%, 
+    rgba(88, 241, 147, 0.6) 75%, 
+    rgba(0, 140, 255, 0.5) 100%);
+  z-index: -2;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+@keyframes backgroundFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.8;
+  }
+  33% {
+    transform: translateY(-10px) rotate(1deg);
+    opacity: 1;
+  }
+  66% {
+    transform: translateY(10px) rotate(-1deg);
+    opacity: 0.9;
+  }
+}
+
+/* Enhanced Background Patterns */
+.social-app::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(45deg, transparent 40%, rgba(88, 241, 147, 0.03) 50%, transparent 60%),
+    linear-gradient(-45deg, transparent 40%, rgba(0, 140, 255, 0.03) 50%, transparent 60%);
+  background-size: 100px 100px, 80px 80px;
+  pointer-events: none;
+  z-index: -1;
+  animation: patternMove 30s linear infinite;
+}
+
+@keyframes patternMove {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 100px 100px, 80px 80px;
+  }
+}
+
+/* Main Content Area with Mixed Background */
+.social-app .main-content {
+  flex: 1;
+  margin-left: 300px;
+  min-width: 0;
+  padding-top: 20px;
+  transition: margin-left 0.3s ease;
+  background: linear-gradient(180deg, 
+    rgba(230, 255, 214, 0.9) 0%, 
+    rgba(199, 240, 214, 0.8) 50%, 
+    rgba(179, 230, 255, 0.7) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px 0 0 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: 
+    inset 0 0 20px rgba(88, 241, 147, 0.1),
+    0 8px 32px rgba(0, 140, 255, 0.15);
+  position: relative;
+}
+
+/* FeatherGram Logo in Right Upper Area */
+.feathergram-logo {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background: white;
+  padding: 15px 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.feathergram-logo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 15px;
+  padding: 2px;
+  background: linear-gradient(135deg, 
+    #58f193 0%, 
+    #399918 25%, 
+    #008cff 75%, 
+    #0056b3 100%);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: xor;
+  -webkit-mask-composite: xor;
+}
+
+.feathergram-logo:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.feathergram-logo-text {
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(135deg, 
+    #399918 0%, 
+    #008cff 50%, 
+    #0056b3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 1;
+}
+
+.feathergram-logo-subtitle {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+  margin-top: 5px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+/* Logo Animation */
+.feathergram-logo::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, 
+    transparent 0%, 
+    rgba(88, 241, 147, 0.1) 50%, 
+    transparent 100%);
+  border-radius: 15px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.feathergram-logo:hover::after {
+  opacity: 1;
+}
+
+/* Responsive Logo Positioning */
+@media (max-width: 1024px) {
+  .feathergram-logo {
+    top: 15px;
+    right: 20px;
+    padding: 12px 20px;
+  }
+  
+  .feathergram-logo-text {
+    font-size: 20px;
+  }
+  
+  .feathergram-logo-subtitle {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 768px) {
+  .feathergram-logo {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin: 0 auto 20px auto;
+    width: fit-content;
+    padding: 15px 25px;
+  }
+  
+  .feathergram-logo-text {
+    font-size: 22px;
+  }
+  
+  .feathergram-logo-subtitle {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .feathergram-logo {
+    padding: 12px 20px;
+    margin-bottom: 15px;
+  }
+  
+  .feathergram-logo-text {
+    font-size: 20px;
+  }
+  
+  .feathergram-logo-subtitle {
+    font-size: 11px;
+  }
+}
+
+.social-app .modern-sidebar.collapsed ~ .main-content {
+  margin-left: 80px;
+}
+
+.social-app .main-content:has(+ .right-sidebar) {
+  margin-right: 320px;
+}
+
+.social-app .modern-sidebar.collapsed ~ .main-content:has(+ .right-sidebar) {
+  margin-left: 80px;
+  margin-right: 320px;
+}
+
+/* Responsive Background Adjustments */
+@media (max-width: 1024px) {
+  .social-app {
+    background: linear-gradient(135deg, 
+      var(--bg-gradient-1) 0%, 
+      var(--bg-gradient-4) 50%, 
+      var(--bg-gradient-2) 100%);
+  }
+  
+  .social-app .main-content {
+    margin-left: 280px;
+    margin-right: 10px;
+    border-radius: 15px 0 0 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .social-app {
+    background: linear-gradient(180deg, 
+      var(--bg-gradient-1) 0%, 
+      var(--bg-gradient-4) 100%);
+  }
+  
+  .social-app .main-content {
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 15px;
+    margin: 10px;
+  }
+  
+  .social-app::before,
+  .social-app::after {
+    animation: none;
+  }
+}
+
+/* Dark Mode Override for Mixed Background */
+.social-app.theme-dark,
+.social-app.theme-system.theme-dark-resolved {
+  --bg-primary: #0a1a0a;
+  --bg-secondary: #0d2b0d;
+  --bg-tertiary: #0a1a2a;
+  --bg-quaternary: #0d2b4a;
+  --bg-mixed: #0a1a1a;
+  --bg-gradient-1: #0a1a0a;
+  --bg-gradient-2: #0d2b0d;
+  --bg-gradient-3: #0a1a2a;
+  --bg-gradient-4: #0d2b4a;
+  
+  background: linear-gradient(135deg, 
+    var(--bg-gradient-1) 0%, 
+    var(--bg-gradient-4) 25%, 
+    var(--bg-gradient-2) 50%, 
+    var(--bg-gradient-3) 75%, 
+    var(--bg-gradient-4) 100%);
+  
+  --text-primary: #ffffff;
+  --text-secondary: #e2e8f0;
+  --text-accent: #60a5fa;
+  
+  --bg-light: #1a1a1a;
+  --bg-card: #2d2d2d;
+  --bg-secondary-light: #1a1a1a;
+  --glass-bg: rgba(45, 45, 45, 0.8);
+  --glass-border: rgba(88, 241, 147, 0.2);
+  --glass-shadow: rgba(0, 140, 255, 0.1);
+}
+
+.social-app {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg-light);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.social-app.no-right-sidebar .main-content {
+  margin-right: 0;
+}
+
+.social-app .sidebar {
+  width: 280px;
+  padding: 24px;
+  background: var(--bg-light);
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.social-app .main-container {
+  flex: 1;
+  margin-left: 280px;
+  background: var(--bg-light);
+  min-height: 100vh;
+}
+
+.social-app button {
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+}
+
+.social-app a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* When sidebar is collapsed, adjust main content */
+.social-app .modern-sidebar.collapsed ~ .main-content {
+  margin-left: 80px; /* Smaller margin when sidebar is collapsed */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.social-app .main-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.social-app .main-content {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+  .social-app .main-content {
+    margin-left: 300px;
+  }
+  
+  .social-app .modern-sidebar.collapsed ~ .main-content {
+    margin-left: 80px;
+  }
+  
+  .social-app.no-right-sidebar .main-content {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 1200px) {
+  .social-app .main-content {
+    margin-left: 300px;
+  }
+  
+  .social-app .modern-sidebar.collapsed ~ .main-content {
+    margin-left: 80px;
+  }
+  
+  .social-app.no-right-sidebar .main-content {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 1024px) {
+  .social-app .main-content {
+    margin-left: 80px; /* Always collapsed on tablet */
+  }
+  
+  .social-app .modern-sidebar.collapsed ~ .main-content {
+    margin-left: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .social-app .main-content {
+    margin-left: 0; /* No margin on mobile when sidebar is hidden */
+  }
+  
+  .social-app .modern-sidebar.expanded ~ .main-content {
+    margin-left: 0; /* No margin even when sidebar is shown on mobile */
+  }
+}
+
+@media (max-width: 640px) {
+  .social-app .main-content {
+    margin-left: 0;
+  }
+}
+
+/* Basic page styles */
+.social-app .explore-page,
+.social-app .feed-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+  background-color: var(--bg-light);
+  transition: all 0.3s ease;
+}
+
+/* Dark mode glassmorphism effects */
+.social-app.theme-dark .modern-sidebar,
+.social-app.theme-system.theme-dark-resolved .modern-sidebar {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid var(--glass-border);
+}
+
+/* Smooth transitions for all elements */
+.social-app * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+} 
+
+/* Main Content without Header */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  margin-left: 280px;
+  transition: margin-left 0.3s ease;
+  min-height: 100vh;
+} 

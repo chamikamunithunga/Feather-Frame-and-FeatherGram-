@@ -1,0 +1,277 @@
+/* Location Section Background */
+.location {
+  background-image: url("/images/MM2.jpg");
+  background-color: #f8f9fa;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+  position: relative;
+  overflow: hidden;
+}
+
+.location::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.location .container {
+  position: relative;
+  z-index: 2;
+}
+
+.location .heading {
+  position: relative;
+  z-index: 2;
+}
+
+.location .heading h1,
+.location .heading p {
+  color: #ffffff;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.location .box {
+  position: relative;
+  border-radius: clamp(5px, 1vw, 10px);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.location .box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.location img {
+  border-radius: clamp(5px, 1vw, 10px);
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.location .box:hover img {
+  transform: scale(1.05);
+}
+.location .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: clamp(200px, 30vw, 250px);
+  width: 100%;
+  color: #fff;
+  z-index: 222;
+  padding: clamp(10px, 2vw, 20px);
+}
+.location .overlay::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: clamp(280px, 80vw, 340px);
+  height: clamp(170px, 60vw, 210px);
+  background: rgb(15 28 47 / 30%);
+  z-index: -1;
+  margin: clamp(15px, 3vw, 20px);
+  border-radius: clamp(5px, 1vw, 10px);
+}
+.location h5 {
+  font-size: clamp(16px, 3.5vw, 18px);
+  font-weight: 600;
+  margin-bottom: clamp(5px, 1vw, 10px);
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.location label {
+  color: #fff;
+  margin-right: clamp(15px, 3vw, 20px);
+  opacity: 0.9;
+  font-size: clamp(12px, 2.5vw, 14px);
+  font-weight: 500;
+}
+/* Responsive Breakpoints */
+@media screen and (max-width: 1200px) {
+  .location .overlay::after {
+    width: clamp(250px, 70vw, 300px);
+    height: clamp(150px, 50vw, 190px);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .location .overlay::after {
+    width: clamp(220px, 65vw, 280px);
+    height: clamp(130px, 45vw, 170px);
+  }
+  
+  .location .overlay {
+    height: clamp(180px, 25vw, 220px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .location .overlay::after {
+    width: clamp(200px, 60vw, 250px);
+    height: clamp(120px, 40vw, 150px);
+  }
+  
+  .location .overlay {
+    height: clamp(160px, 20vw, 200px);
+  }
+  
+  .location h5 {
+    font-size: 16px;
+  }
+  
+  .location label {
+    font-size: 12px;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .location .overlay::after {
+    width: clamp(180px, 55vw, 220px);
+    height: clamp(100px, 35vw, 130px);
+  }
+  
+  .location .overlay {
+    height: clamp(140px, 18vw, 180px);
+  }
+  
+  .location h5 {
+    font-size: 15px;
+  }
+  
+  .location label {
+    font-size: 11px;
+    margin-right: 8px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .location .overlay::after {
+    width: clamp(160px, 50vw, 200px);
+    height: clamp(90px, 30vw, 120px);
+  }
+  
+  .location .overlay {
+    height: clamp(120px, 15vw, 160px);
+  }
+  
+  .location h5 {
+    font-size: 14px;
+  }
+  
+  .location label {
+    font-size: 10px;
+    margin-right: 6px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .location .overlay::after {
+    width: clamp(140px, 45vw, 180px);
+    height: clamp(80px, 25vw, 110px);
+  }
+  
+  .location .overlay {
+    height: clamp(100px, 12vw, 140px);
+  }
+  
+  .location h5 {
+    font-size: 13px;
+  }
+  
+  .location label {
+    font-size: 9px;
+    margin-right: 5px;
+  }
+}
+
+/* Landscape Orientation */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .location .overlay::after {
+    width: clamp(150px, 40vw, 200px);
+    height: clamp(80px, 25vw, 120px);
+  }
+  
+  .location .overlay {
+    height: clamp(100px, 15vw, 150px);
+  }
+}
+
+/* Touch Devices */
+@media (hover: none) and (pointer: coarse) {
+  .location .box:hover {
+    transform: none;
+  }
+  
+  .location .box:active {
+    transform: scale(0.98);
+  }
+  
+  .location .box:hover img {
+    transform: none;
+  }
+  
+  .location .box:active img {
+    transform: scale(1.02);
+  }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .location {
+    background-image: url("/images/MM2.jpg");
+  }
+  
+  .location img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .location .box,
+  .location img {
+    transition: none;
+  }
+  
+  .location .box:hover,
+  .location .box:hover img {
+    transform: none;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .location .overlay::after {
+    background: rgb(15 28 47 / 40%);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .location .box {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+  
+  .location .overlay::after {
+    background: rgb(15 28 47 / 50%);
+  }
+}

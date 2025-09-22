@@ -1,0 +1,234 @@
+/* AI Section Styles */
+.featherframe-ai-section {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #00000000 0%, rgba(226, 232, 240, 0) 100%),
+              url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80') center/cover no-repeat;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.featherframe-ai-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(34, 197, 94, 0.1) 50%, rgba(5, 150, 105, 0.1) 100%);
+  z-index: 1;
+}
+
+.featherframe-ai-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%2310b981" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  opacity: 0.4;
+  z-index: 1;
+}
+
+.featherframe-ai-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.featherframe-ai-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.featherframe-ai-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #10b981 0%, #34d399 50%, #10b981 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+}
+
+.featherframe-ai-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(45deg, #10b981, #34d399, #6ee7b7, #10b981);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: greenGradientShift 4s ease-in-out infinite;
+}
+
+.featherframe-ai-subtitle {
+  font-size: 1.3rem;
+  color: #ffffff;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-weight: 500;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  background: rgba(16, 185, 129, 0.1);
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+/* Perfect Green Gradient Animation */
+@keyframes greenGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Animated Logo Tape Section */
+.featherframe-logo-tape-section {
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(135deg, #10b981 0%, #34d399 25%, #6ee7b7 50%, #a7f3d0 75%, #d1fae5 100%);
+  position: relative;
+  overflow: hidden;
+  margin: 2rem 0;
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+}
+
+.featherframe-logo-tape-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+  animation: tapeShine 3s linear infinite;
+}
+
+.featherframe-logo-tape-container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: logoTapeScroll 15s linear infinite;
+  width: max-content;
+}
+
+.featherframe-logo-text {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  margin: 0 4rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.featherframe-logo-text::after {
+  content: '🪶';
+  margin-left: 1rem;
+  font-size: 2rem;
+  animation: featherFloat 2s ease-in-out infinite alternate;
+}
+
+.featherframe-logo-text.gram::after {
+  content: '📱';
+  animation: phoneGlow 2s ease-in-out infinite alternate;
+}
+
+/* Animations */
+@keyframes logoTapeScroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes tapeShine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes featherFloat {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-5px) rotate(5deg);
+    opacity: 1;
+  }
+}
+
+@keyframes phoneGlow {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .featherframe-ai-section {
+    padding: 3rem 0;
+  }
+  
+  .featherframe-ai-container {
+    padding: 0 1rem;
+  }
+  
+  .featherframe-ai-title {
+    font-size: 2.5rem;
+  }
+  
+  .featherframe-ai-subtitle {
+    font-size: 1.1rem;
+    padding: 0.8rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .featherframe-ai-section {
+    padding: 2rem 0;
+  }
+  
+  .featherframe-ai-title {
+    font-size: 2rem;
+  }
+  
+  .featherframe-ai-subtitle {
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+  }
+} 

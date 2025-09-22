@@ -1,0 +1,317 @@
+/* Fonts loaded in index.html - @import not allowed in bundlers */
+
+/* Scroll Animation Keyframes */
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-60px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8) rotate(-3deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-80px) rotateY(-15deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) rotateY(0deg);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(80px) rotateY(15deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) rotateY(0deg);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(-50px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05) translateY(0);
+  }
+  70% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px 0 rgb(112, 121, 138);
+  }
+  50% {
+    box-shadow: 0 0 30px 5px rgba(112, 121, 138, 0.8);
+  }
+}
+
+/* Animation Wrapper Classes */
+.featured .heading-wrapper {
+  opacity: 0;
+  transform: translateY(-60px) scale(0.95);
+  transition: all 0.8s ease;
+}
+
+.featured .heading-wrapper.animate-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: slideInFromTop 0.8s ease forwards;
+}
+
+.featured .cards-wrapper {
+  opacity: 0;
+  transform: translateY(60px) scale(0.95);
+  transition: all 0.8s ease;
+}
+
+.featured .cards-wrapper.animate-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: slideInFromBottom 0.8s ease forwards;
+}
+
+/* Enhanced Box Animations */
+.featured .box {
+  box-shadow: 0 0 20px 0 rgb(112, 121, 138);
+  border-radius: 6px;
+  text-align: center;
+  padding: 30px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  opacity: 0;
+  transform: translateY(30px) scale(0.9);
+}
+
+.featured .cards-wrapper.animate-in .box {
+  animation: bounceIn 0.6s ease forwards;
+}
+
+.featured .cards-wrapper.animate-in .box:nth-child(1) { animation-delay: 0.1s; }
+.featured .cards-wrapper.animate-in .box:nth-child(2) { animation-delay: 0.3s; }
+.featured .cards-wrapper.animate-in .box:nth-child(3) { animation-delay: 0.5s; }
+.featured .cards-wrapper.animate-in .box:nth-child(4) { animation-delay: 0.7s; }
+.featured .cards-wrapper.animate-in .box:nth-child(5) { animation-delay: 0.9s; }
+.featured .cards-wrapper.animate-in .box:nth-child(6) { animation-delay: 1.1s; }
+
+.featured .box:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 15px 40px 0 rgba(112, 121, 138, 0.8);
+  animation: glow 2s ease-in-out infinite;
+}
+.featured img {
+  width: 65px;
+  height: 65px;
+  margin: auto;
+}
+.featured.background {
+  background-image: url("/images/abt.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 70px 0 60px 0;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0.98);
+  transition: all 1s ease;
+}
+
+.featured.background.animate-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+  }
+}
+.featured .container {
+  position: relative;
+  z-index: 2;
+}
+.featured::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: -80px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #4f8cff33 0%, transparent 70%);
+  z-index: 1;
+  filter: blur(8px);
+  animation: float 6s ease-in-out infinite;
+}
+.featured::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, #38e7b033 0%, transparent 70%);
+  z-index: 1;
+  filter: blur(8px);
+  animation: float 8s ease-in-out infinite reverse;
+}
+.featured .heading h1 {
+  color: #fff;
+  font-family: 'Libertinus Math', serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+  margin-top: 24px;
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: all 0.8s ease;
+}
+
+.featured .heading-wrapper.animate-in .heading h1 {
+  opacity: 1;
+  transform: translateY(0);
+  animation: slideInFromTop 0.8s ease forwards;
+}
+
+.featured .heading p {
+  color: #fff;
+  opacity: 0;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.1px;
+  transform: translateY(-20px);
+  transition: all 0.8s ease;
+}
+
+.featured .heading-wrapper.animate-in .heading p {
+  opacity: 0.92;
+  transform: translateY(0);
+  animation: slideInFromTop 0.8s ease forwards 0.2s;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .featured.background {
+    background-attachment: scroll;
+  }
+  
+  .featured .box:hover {
+    transform: translateY(-5px) scale(1.02);
+  }
+}
+
+@media (max-width: 768px) {
+  .featured.background {
+    padding: 50px 0 40px 0;
+  }
+  
+  .featured .box {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .featured .heading h1 {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .featured .heading p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .featured.background {
+    padding: 40px 0 30px 0;
+  }
+  
+  .featured .box {
+    padding: 15px;
+  }
+  
+  .featured .heading h1 {
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .featured .heading p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .featured .heading-wrapper,
+  .featured .cards-wrapper,
+  .featured .box,
+  .featured::before,
+  .featured::after,
+  .featured.background {
+    animation: none !important;
+    transition: none;
+  }
+  
+  .featured .heading-wrapper,
+  .featured .cards-wrapper,
+  .featured .box,
+  .featured.background {
+    opacity: 1;
+    transform: none;
+  }
+  
+  .featured .heading h1,
+  .featured .heading p {
+    opacity: 1;
+    transform: none;
+  }
+  
+  .featured .heading p {
+    opacity: 0.92;
+  }
+}

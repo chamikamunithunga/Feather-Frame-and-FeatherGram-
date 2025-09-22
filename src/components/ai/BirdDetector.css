@@ -1,0 +1,1541 @@
+/* Reset and Base Styles */
+.featherframe-bird-app-container * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.featherframe-bird-app-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: url('/images/aibg.jpg') center/cover no-repeat, linear-gradient(135deg, #595e76 0%, #cec6d5 100%);
+  background-attachment: fixed;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  border-radius: 300px;
+}
+
+/* Main Content */
+.featherframe-main-content {
+  flex: 1;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
+  min-height: 100vh;
+}
+
+/* Tab Navigation - Only for Mobile/Tablet */
+.featherframe-tab-navigation {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 0.4rem;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.featherframe-tab-button {
+  background: transparent;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffffb3;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 0.2rem;
+  flex: 1;
+}
+
+.featherframe-tab-button:hover {
+  color: #fff;
+  background: #ffffff1a;
+}
+
+.featherframe-tab-button.featherframe-active {
+  background: #ffffff33;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Content Grid - Side by Side Layout (Desktop) */
+.featherframe-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  width: 100%;
+  max-width: 1200px;
+  align-items: start;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Mobile Content */
+.featherframe-mobile-content {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Search Section */
+.featherframe-search-section {
+  animation: featherframe-fadeIn 0.5s ease-in;
+  width: 100%;
+  height: 100%;
+}
+
+.featherframe-search-container {
+  background: linear-gradient(135deg, #000000de 0%, #26ff0095 100%);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 15px 35px #0000002f;
+  width: 100%;
+  height: 100%;
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+
+.featherframe-search-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+}
+
+.featherframe-search-container::after {
+  content: '🔍';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.featherframe-search-header {
+  text-align: center;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.featherframe-search-header h2 {
+  font-size: 2.2rem;
+  color: white;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.featherframe-search-header p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Search Form */
+.featherframe-search-form {
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.featherframe-search-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.featherframe-search-input {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  backdrop-filter: blur(10px);
+  min-height: 60px;
+  resize: none;
+}
+
+.featherframe-search-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+/* Input Wrapper for Suggestions */
+.featherframe-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Search Suggestions Dropdown */
+.featherframe-suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #667eea;
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: -2px;
+}
+
+.featherframe-suggestion-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.featherframe-suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.featherframe-suggestion-item:hover {
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.featherframe-suggestion-item:active {
+  background: rgba(102, 126, 234, 0.2);
+}
+
+.featherframe-suggestion-item.featherframe-selected {
+  background: rgba(102, 126, 234, 0.15);
+  border-left: 3px solid #667eea;
+}
+
+.featherframe-suggestion-text {
+  font-size: 1rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.featherframe-suggestion-icon {
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+/* Suggestions Loading */
+.featherframe-suggestions-loading {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #667eea;
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  margin-top: -2px;
+}
+
+/* Scrollbar for suggestions dropdown */
+.featherframe-suggestions-dropdown::-webkit-scrollbar {
+  width: 8px;
+}
+
+.featherframe-suggestions-dropdown::-webkit-scrollbar-track {
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 4px;
+}
+
+.featherframe-suggestions-dropdown::-webkit-scrollbar-thumb {
+  background: rgba(102, 126, 234, 0.5);
+  border-radius: 4px;
+}
+
+.featherframe-suggestions-dropdown::-webkit-scrollbar-thumb:hover {
+  background: rgba(102, 126, 234, 0.7);
+}
+
+.featherframe-search-button {
+  width: 100%;
+  max-width: 250px;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  backdrop-filter: blur(10px);
+  margin: 0 auto;
+  display: block;
+}
+
+.featherframe-search-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(102, 126, 234, 0.4);
+}
+
+.featherframe-search-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Upload Section */
+.featherframe-upload-section {
+  animation: featherframe-fadeIn 0.5s ease-in;
+  width: 100%;
+  height: 100%;
+}
+
+.featherframe-upload-container {
+  background: linear-gradient(135deg, #26ff0095 0%, #000000de 100%);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+
+.featherframe-upload-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+}
+
+.featherframe-upload-container::after {
+  content: '📸';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 80px;
+  height: 80px;
+  background: #ffffff59;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.featherframe-upload-header {
+  text-align: center;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.featherframe-upload-header h2 {
+  font-size: 2.2rem;
+  color: white;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.featherframe-upload-header p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Upload Zone */
+.featherframe-upload-area {
+  margin-bottom: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.featherframe-upload-zone {
+  display: block;
+  border: 3px dashed #ffffff31;
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  min-height: 200px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.featherframe-upload-zone:hover {
+  border-color: #0c7c06;
+  background: #f0f4ff56;
+}
+
+.featherframe-upload-zone.featherframe-dragover {
+  border-color: #667eea;
+  background: #e6f3ff;
+  transform: scale(1.01);
+}
+
+.featherframe-upload-content {
+  pointer-events: none;
+}
+
+.featherframe-upload-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.featherframe-upload-zone h3 {
+  font-size: 1.4rem;
+  color: white;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.featherframe-upload-zone p {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.featherframe-upload-hint {
+  display: block;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+.featherframe-upload-zone input {
+  display: none;
+}
+
+/* Preview Container */
+.featherframe-preview-container {
+  margin-bottom: 1rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.featherframe-preview-container h4 {
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.featherframe-image-preview {
+  max-width: 200px;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.featherframe-image-preview img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Detect Button */
+.featherframe-detect-button {
+  width: 100%;
+  max-width: 250px;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 auto;
+  display: block;
+  flex-shrink: 0;
+  backdrop-filter: blur(10px);
+}
+
+.featherframe-detect-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(102, 126, 234, 0.4);
+}
+
+.featherframe-detect-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Results Container */
+.featherframe-results-container {
+  margin-top: 1.5rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.featherframe-result-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5e9;
+}
+
+.featherframe-result-card.featherframe-success {
+  border-left: 3px solid #10b981;
+}
+
+.featherframe-result-card.featherframe-error {
+  border-left: 3px solid #ef4444;
+}
+
+.featherframe-result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.featherframe-result-header h3 {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.featherframe-confidence-badge {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  padding: 0.4rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Bird Details Card */
+.featherframe-bird-details-card {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin-top: 0.75rem;
+}
+
+.featherframe-bird-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.featherframe-bird-details-header h3 {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.featherframe-search-type-badge {
+  padding: 0.4rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.featherframe-search-type-badge.scientific {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: white;
+}
+
+.featherframe-search-type-badge.common {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+/* Info Sections */
+.featherframe-info-section {
+  margin-bottom: 1.5rem;
+}
+
+.featherframe-section-header {
+  margin-bottom: 0.75rem;
+}
+
+.featherframe-section-header h4 {
+  font-size: 1rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.featherframe-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.featherframe-info-item {
+  background: #fff;
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #e1e5e9;
+}
+
+.featherframe-info-item label {
+  display: block;
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+
+.featherframe-info-item span {
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.featherframe-status-badge {
+  background: #10b981;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* Description Text */
+.featherframe-description-text {
+  background: #fff;
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #e1e5e9;
+  line-height: 1.5;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+/* Habitat & Diet Grid */
+.featherframe-habitat-diet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.75rem;
+}
+
+.featherframe-habitat-card, .featherframe-diet-card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #e1e5e9;
+}
+
+.featherframe-habitat-card h5, .featherframe-diet-card h5 {
+  font-size: 0.95rem;
+  color: #333;
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.featherframe-habitat-card p, .featherframe-diet-card p {
+  color: #666;
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+/* Behavior Grid */
+.featherframe-behavior-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.featherframe-behavior-item {
+  background: #fff;
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #e1e5e9;
+}
+
+.featherframe-behavior-item label {
+  display: block;
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+
+.featherframe-behavior-item span {
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Breeding & Distribution Text */
+.featherframe-breeding-text, .featherframe-distribution-text {
+  background: #fff;
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #e1e5e9;
+  line-height: 1.5;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+/* Occurrences Grid */
+.featherframe-occurrences-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.75rem;
+}
+
+.featherframe-occurrence-card {
+  background: #fff;
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #e1e5e9;
+}
+
+.featherframe-occurrence-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.featherframe-location-icon {
+  font-size: 1rem;
+}
+
+.featherframe-location-name {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.featherframe-occurrence-details {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* Detected Objects Section */
+.featherframe-detected-objects-section {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e1e5e9;
+}
+
+.featherframe-detected-objects-section h4 {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0.75rem;
+}
+
+.featherframe-objects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.4rem;
+}
+
+.featherframe-object-card {
+  background: #f8fafc;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #e1e5e9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.featherframe-object-name {
+  font-weight: 500;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.featherframe-object-confidence {
+  background: #667eea;
+  color: white;
+  padding: 0.2rem 0.4rem;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* Loading Spinner */
+.featherframe-loading-spinner {
+  display: inline-block;
+  animation: featherframe-spin 1s linear infinite;
+}
+
+@keyframes featherframe-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Animations */
+@keyframes featherframe-fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .featherframe-content-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .featherframe-main-content {
+    padding: 1rem;
+  }
+  
+  .featherframe-search-container, .featherframe-upload-container {
+    padding: 1.5rem;
+    min-height: 350px;
+  }
+  
+  .featherframe-search-header h2, .featherframe-upload-header h2 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .featherframe-content-grid {
+    display: none;
+  }
+  
+  .featherframe-mobile-content {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .featherframe-main-content {
+    padding: 0.75rem;
+    padding-top: 0.75rem;
+  }
+  
+  .featherframe-search-container, .featherframe-upload-container {
+    padding: 1.25rem;
+    min-height: 300px;
+  }
+  
+  .featherframe-search-header h2, .featherframe-upload-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .featherframe-search-header p, .featherframe-upload-header p {
+    font-size: 0.85rem;
+  }
+  
+  .featherframe-search-input-group {
+    flex-direction: column;
+  }
+  
+  .featherframe-search-button {
+    width: 100%;
+  }
+  
+  /* Mobile suggestions adjustments */
+  .featherframe-suggestions-dropdown {
+    max-height: 250px;
+  }
+  
+  .featherframe-suggestion-item {
+    padding: 0.75rem 1rem;
+  }
+  
+  .featherframe-suggestion-text {
+    font-size: 0.9rem;
+  }
+  
+  .featherframe-upload-zone {
+    padding: 1.5rem 1rem;
+    min-height: 120px;
+  }
+  
+  .featherframe-upload-icon {
+    font-size: 2rem;
+  }
+  
+  .featherframe-upload-zone h3 {
+    font-size: 1.1rem;
+  }
+  
+  .featherframe-info-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .featherframe-habitat-diet-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .featherframe-behavior-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .featherframe-occurrences-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .featherframe-objects-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .featherframe-result-header {
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: flex-start;
+  }
+  
+  .featherframe-bird-details-header {
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: flex-start;
+  }
+  
+  .featherframe-tab-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .featherframe-tab-navigation {
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .featherframe-search-container, .featherframe-upload-container {
+    padding: 1rem;
+    min-height: 250px;
+  }
+  
+  .featherframe-search-header h2, .featherframe-upload-header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .featherframe-search-header p, .featherframe-upload-header p {
+    font-size: 0.8rem;
+  }
+  
+  .featherframe-upload-zone {
+    padding: 1rem 0.75rem;
+    min-height: 100px;
+  }
+  
+  .featherframe-upload-icon {
+    font-size: 1.5rem;
+  }
+  
+  .featherframe-upload-zone h3 {
+    font-size: 1rem;
+  }
+  
+  .featherframe-result-card {
+    padding: 1rem;
+  }
+  
+  .featherframe-bird-details-card {
+    padding: 0.75rem;
+  }
+  
+  /* Extra small mobile suggestions adjustments */
+  .featherframe-suggestions-dropdown {
+    max-height: 200px;
+  }
+  
+  .featherframe-suggestion-item {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .featherframe-suggestion-text {
+    font-size: 0.85rem;
+  }
+  
+  .featherframe-info-item, .featherframe-behavior-item {
+    padding: 0.5rem;
+  }
+  
+  .featherframe-habitat-card, .featherframe-diet-card {
+    padding: 0.75rem;
+  }
+  
+  .featherframe-occurrence-card {
+    padding: 0.5rem;
+  }
+  
+  .featherframe-occurrence-details {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  
+  .featherframe-tab-button {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.75rem;
+  }
+  
+  .featherframe-tab-navigation {
+    max-width: 300px;
+  }
+}
+
+/* Detection Result Styles */
+.featherframe-detection-result {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border-radius: 12px;
+  animation: fadeInUp 0.5s ease;
+}
+
+.featherframe-detection-result.success {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  border: 2px solid #10b981;
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
+}
+
+.featherframe-detection-result.error {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 2px solid #f59e0b;
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.2);
+}
+
+.featherframe-detection-result.warning {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border: 2px solid #3b82f6;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+}
+
+.featherframe-success-result {
+  text-align: center;
+}
+
+.featherframe-success-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.featherframe-success-result h4 {
+  color: #065f46;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.featherframe-success-result p {
+  color: #059669;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.featherframe-error-result {
+  color: #92400e;
+}
+
+.featherframe-error-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.featherframe-error-icon {
+  font-size: 2.5rem;
+}
+
+.featherframe-error-header h4 {
+  color: #92400e;
+  font-size: 1.4rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+.featherframe-error-message {
+  color: #b45309;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.featherframe-suggestions {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.featherframe-suggestions h5 {
+  color: #92400e;
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.featherframe-suggestions ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.featherframe-suggestions li {
+  color: #b45309;
+  padding: 0.3rem 0;
+  font-size: 0.95rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.featherframe-suggestions li::before {
+  content: '•';
+  color: #f59e0b;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+.featherframe-help-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.featherframe-help-button,
+.featherframe-clear-button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.featherframe-help-button {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.featherframe-help-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(59, 130, 246, 0.4);
+}
+
+.featherframe-clear-button {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
+}
+
+.featherframe-clear-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(107, 114, 128, 0.4);
+}
+
+.featherframe-continue-button {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.featherframe-continue-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);
+}
+
+/* Modal Styles */
+.featherframe-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.featherframe-modal-content {
+  background: white;
+  border-radius: 16px;
+  max-width: 600px;
+  max-height: 80vh;
+  width: 90%;
+  overflow-y: auto;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  animation: slideInUp 0.3s ease;
+}
+
+.featherframe-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 2px solid #f3f4f6;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border-radius: 16px 16px 0 0;
+}
+
+.featherframe-modal-header h3 {
+  color: #065f46;
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+.featherframe-modal-close {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.featherframe-modal-close:hover {
+  background: rgba(107, 114, 128, 0.1);
+  color: #374151;
+}
+
+.featherframe-modal-body {
+  padding: 2rem;
+}
+
+.featherframe-tip-section {
+  margin-bottom: 2rem;
+}
+
+.featherframe-tip-section h4 {
+  color: #1f2937;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.featherframe-tip-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.featherframe-tip-section li {
+  color: #4b5563;
+  padding: 0.5rem 0;
+  font-size: 0.95rem;
+  position: relative;
+  padding-left: 2rem;
+  line-height: 1.5;
+}
+
+.featherframe-tip-section li::before {
+  position: absolute;
+  left: 0;
+  font-size: 1rem;
+}
+
+.featherframe-tip-section:first-child li::before {
+  content: '✅';
+}
+
+.featherframe-tip-section:nth-child(2) li::before {
+  content: '❌';
+}
+
+.featherframe-tip-section:nth-child(3) li::before {
+  content: '🎯';
+}
+
+.featherframe-modal-footer {
+  padding: 1.5rem 2rem;
+  border-top: 2px solid #f3f4f6;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  border-radius: 0 0 16px 16px;
+  text-align: center;
+}
+
+.featherframe-modal-button {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.featherframe-modal-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Enhanced Loading Spinner */
+.featherframe-loading-spinner {
+  display: inline-block;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Warning Result Styles */
+.featherframe-warning-result {
+  color: #1e40af;
+}
+
+.featherframe-warning-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.featherframe-warning-icon {
+  font-size: 2.5rem;
+}
+
+.featherframe-warning-header h4 {
+  color: #1e40af;
+  font-size: 1.4rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+.featherframe-warning-message {
+  color: #2563eb;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.featherframe-analysis-details {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.featherframe-analysis-details h5 {
+  color: #1e40af;
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.featherframe-analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.8rem;
+}
+
+.featherframe-analysis-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.featherframe-analysis-item span:first-child {
+  color: #1e40af;
+  font-weight: 500;
+}
+
+.featherframe-analysis-item span:last-child {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+/* Upload Tips */
+.featherframe-upload-tips {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.featherframe-tip {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+}
+
+/* Mobile responsive for detection results */
+@media (max-width: 768px) {
+  .featherframe-help-actions {
+    flex-direction: column;
+  }
+
+  .featherframe-modal-content {
+    width: 95%;
+    max-height: 85vh;
+  }
+
+  .featherframe-modal-header,
+  .featherframe-modal-body,
+  .featherframe-modal-footer {
+    padding: 1rem 1.5rem;
+  }
+
+  .featherframe-detection-result {
+    margin: 1.5rem 0;
+    padding: 1rem;
+  }
+
+  .featherframe-error-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .featherframe-suggestions {
+    padding: 0.8rem;
+  }
+} 

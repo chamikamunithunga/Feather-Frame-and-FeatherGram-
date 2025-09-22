@@ -1,0 +1,309 @@
+.awards {
+  background-image: url("/images/ll.jpg");
+  background-color: #000000;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #fff;
+  text-align: center;
+  padding: clamp(3rem, 8vw, 6rem) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.awards::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  z-index: 1;
+}
+
+.awards > * {
+  position: relative;
+  z-index: 2;
+}
+.awards .heading {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.awards .heading p {
+  color: #27ae60;
+  font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: clamp(1.1rem, 2.8vw, 1.4rem);
+  font-weight: 500;
+  margin-bottom: clamp(0.5rem, 1.5vw, 1rem);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+}
+
+.awards .heading h1 {
+  color: #fff;
+  font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 700;
+  margin-bottom: clamp(1rem, 3vw, 2rem);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+.awards .icon {
+  width: clamp(80px, 15vw, 120px);
+  height: clamp(80px, 15vw, 120px);
+  line-height: clamp(80px, 15vw, 120px);
+  margin: auto;
+  margin-top: clamp(2rem, 5vw, 3rem);
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  border-radius: 50%;
+  font-size: clamp(24px, 5vw, 32px);
+  color: #ffffff;
+  box-shadow: 0 clamp(5px, 1.5vw, 10px) clamp(15px, 3vw, 25px) rgba(39, 174, 96, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.awards .icon:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 clamp(8px, 2vw, 15px) clamp(25px, 5vw, 35px) rgba(39, 174, 96, 0.4);
+}
+
+.awards .icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+  border-radius: 50%;
+}
+.awards h1 {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 700;
+  margin: clamp(1rem, 3vw, 2rem) 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  line-height: 1.2;
+}
+
+.awards p {
+  color: #ffffff;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  line-height: 1.6;
+  margin-bottom: clamp(1rem, 3vw, 2rem);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+  .awards {
+    padding: clamp(2.5rem, 6vw, 5rem) 0;
+  }
+  
+  .awards .icon {
+    width: clamp(70px, 12vw, 100px);
+    height: clamp(70px, 12vw, 100px);
+    line-height: clamp(70px, 12vw, 100px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .awards {
+    padding: clamp(2rem, 5vw, 4rem) 0;
+  }
+  
+  .awards .heading h1 {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+  }
+  
+  .awards h1 {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .awards {
+    padding: clamp(1.5rem, 4vw, 3rem) 0;
+  }
+  
+  .awards .heading h1 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+  
+  .awards h1 {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+  }
+  
+  .awards .icon {
+    width: clamp(60px, 10vw, 80px);
+    height: clamp(60px, 10vw, 80px);
+    line-height: clamp(60px, 10vw, 80px);
+    font-size: clamp(18px, 4vw, 24px);
+  }
+  
+  .awards p {
+    font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 576px) {
+  .awards {
+    padding: clamp(1rem, 3vw, 2rem) 0;
+  }
+  
+  .awards .heading h1 {
+    font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+  }
+  
+  .awards h1 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+  
+  .awards .icon {
+    width: clamp(50px, 8vw, 70px);
+    height: clamp(50px, 8vw, 70px);
+    line-height: clamp(50px, 8vw, 70px);
+    font-size: clamp(16px, 3.5vw, 20px);
+  }
+  
+  .awards p {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 480px) {
+  .awards {
+    padding: clamp(0.8rem, 2.5vw, 1.5rem) 0;
+  }
+  
+  .awards .heading h1 {
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+  }
+  
+  .awards h1 {
+    font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+  }
+  
+  .awards .icon {
+    width: clamp(45px, 7vw, 60px);
+    height: clamp(45px, 7vw, 60px);
+    line-height: clamp(45px, 7vw, 60px);
+    font-size: clamp(14px, 3vw, 18px);
+  }
+  
+  .awards p {
+    font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 375px) {
+  .awards {
+    padding: clamp(0.6rem, 2vw, 1.2rem) 0;
+  }
+  
+  .awards .heading h1 {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+  }
+  
+  .awards h1 {
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+  }
+  
+  .awards .icon {
+    width: clamp(40px, 6vw, 55px);
+    height: clamp(40px, 6vw, 55px);
+    line-height: clamp(40px, 6vw, 55px);
+    font-size: clamp(12px, 2.5vw, 16px);
+  }
+  
+  .awards p {
+    font-size: clamp(0.6rem, 1.6vw, 0.8rem);
+    max-width: 350px;
+  }
+}
+
+/* Landscape Orientation */
+@media (max-width: 768px) and (orientation: landscape) {
+  .awards {
+    padding: clamp(1rem, 3vw, 2rem) 0;
+  }
+  
+  .awards .icon {
+    width: clamp(50px, 8vw, 70px);
+    height: clamp(50px, 8vw, 70px);
+    line-height: clamp(50px, 8vw, 70px);
+  }
+}
+
+/* Touch Devices */
+@media (hover: none) and (pointer: coarse) {
+  .awards .icon:hover {
+    transform: none;
+  }
+  
+  .awards .icon:active {
+    transform: scale(0.95);
+  }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .awards {
+    background-image: url("/images/ll.jpg");
+    background-size: cover;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .awards .icon {
+    transition: none;
+  }
+  
+  .awards .icon:hover {
+    transform: none;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .awards::before {
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .awards {
+    background: none;
+    color: #000;
+  }
+  
+  .awards::before {
+    display: none;
+  }
+  
+  .awards .icon {
+    background: #27ae60;
+    box-shadow: none;
+  }
+  
+  .awards h1,
+  .awards p {
+    color: #000;
+    text-shadow: none;
+  }
+}

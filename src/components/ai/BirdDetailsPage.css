@@ -1,0 +1,713 @@
+/* Bird Details Page Styles */
+.featherframe-bird-details-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem 1rem;
+}
+
+.featherframe-bird-details-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+/* Page Header */
+.featherframe-page-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.featherframe-page-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.featherframe-back-button {
+  position: absolute;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.featherframe-back-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-50%) scale(1.05);
+}
+
+/* Loading Container */
+.featherframe-loading-container {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #667eea;
+}
+
+.featherframe-loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 2rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.featherframe-loading-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #667eea;
+}
+
+.featherframe-loading-container p {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+/* Error Container */
+.featherframe-error-container {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #ef4444;
+}
+
+.featherframe-error-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.featherframe-error-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #ef4444;
+}
+
+.featherframe-error-container p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+/* Bird Details Card */
+.featherframe-bird-details-card {
+  padding: 2rem;
+}
+
+.featherframe-bird-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.featherframe-bird-details-header h3 {
+  font-size: 2rem;
+  color: #333;
+  margin: 0;
+}
+
+.featherframe-search-type-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.featherframe-search-type-badge.scientific {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+.featherframe-search-type-badge.image {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+}
+
+.featherframe-search-type-badge.common {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+}
+
+/* Info Sections */
+.featherframe-info-section {
+  margin-bottom: 2.5rem;
+  background: #f8fafc;
+  border-radius: 15px;
+  padding: 1.5rem;
+  border-left: 4px solid #667eea;
+}
+
+.featherframe-section-header h4 {
+  font-size: 1.3rem;
+  color: #333;
+  margin: 0 0 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Info Grid */
+.featherframe-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.featherframe-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.featherframe-info-item label {
+  font-weight: 600;
+  color: #666;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+            .featherframe-info-item span {
+              font-size: 1.1rem;
+              color: #333;
+              font-weight: 500;
+            }
+
+            .featherframe-scientific-name {
+              font-style: italic;
+              color: #667eea !important;
+              font-weight: 600;
+            }
+
+            .featherframe-common-name {
+              color: #059669 !important;
+              font-weight: 700;
+              font-size: 1.2rem;
+            }
+
+            .featherframe-status-badge {
+              display: inline-block;
+              padding: 0.25rem 0.75rem;
+              border-radius: 15px;
+              font-size: 0.8rem;
+              font-weight: 600;
+              text-transform: uppercase;
+              background: #10b981;
+              color: white;
+            }
+
+            /* Enhanced status badge styles */
+            .featherframe-status-badge.least-concern,
+            .featherframe-status-badge.leastconcern {
+              background: linear-gradient(135deg, #10b981, #059669);
+            }
+
+            .featherframe-status-badge.near-threatened,
+            .featherframe-status-badge.nearthreatened {
+              background: linear-gradient(135deg, #f59e0b, #d97706);
+            }
+
+            .featherframe-status-badge.vulnerable {
+              background: linear-gradient(135deg, #f97316, #ea580c);
+            }
+
+            .featherframe-status-badge.endangered {
+              background: linear-gradient(135deg, #ef4444, #dc2626);
+            }
+
+            .featherframe-status-badge.critically-endangered,
+            .featherframe-status-badge.criticallyendangered {
+              background: linear-gradient(135deg, #7c2d12, #92400e);
+            }
+
+            .featherframe-status-badge.extinct {
+              background: linear-gradient(135deg, #6b7280, #4b5563);
+            }
+
+/* Description */
+            .featherframe-description-text {
+              font-size: 1.1rem;
+              line-height: 1.7;
+              color: #555;
+              margin: 0;
+            }
+
+            /* Bird Image Display */
+            .featherframe-bird-image-container {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 1.5rem;
+              padding: 1rem;
+              background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+              border-radius: 15px;
+              border: 1px solid #e2e8f0;
+            }
+
+            .featherframe-bird-image-wrapper {
+              position: relative;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              min-height: 300px;
+              width: 100%;
+              max-width: 500px;
+            }
+
+            .featherframe-bird-image {
+              max-width: 100%;
+              max-height: 400px;
+              border-radius: 15px;
+              box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+              transition: transform 0.3s ease, box-shadow 0.3s ease;
+              object-fit: contain;
+            }
+
+            .featherframe-bird-image:hover {
+              transform: scale(1.02);
+              box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            }
+
+            .featherframe-image-placeholder {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              width: 100%;
+              height: 300px;
+              background: #f1f5f9;
+              border: 2px dashed #cbd5e1;
+              border-radius: 15px;
+              color: #64748b;
+            }
+
+            .featherframe-placeholder-icon {
+              font-size: 4rem;
+              margin-bottom: 1rem;
+            }
+
+            .featherframe-image-placeholder p {
+              font-size: 1.1rem;
+              margin: 0;
+              color: #64748b;
+            }
+
+            .featherframe-placeholder-subtitle {
+              font-size: 0.9rem !important;
+              color: #94a3b8 !important;
+              margin-top: 0.5rem !important;
+            }
+
+            .featherframe-image-info {
+              text-align: center;
+              max-width: 500px;
+            }
+
+            .featherframe-image-info h5 {
+              font-size: 1.5rem;
+              color: #1e293b;
+              margin: 0 0 0.5rem 0;
+              font-weight: 700;
+            }
+
+            .featherframe-image-scientific {
+              font-style: italic;
+              color: #667eea;
+              font-size: 1.1rem;
+              margin: 0 0 1rem 0;
+              font-weight: 500;
+            }
+
+            .featherframe-image-credit {
+              font-size: 0.9rem;
+              color: #64748b;
+              margin: 0.5rem 0;
+              font-style: italic;
+            }
+
+            .featherframe-image-source {
+              font-size: 0.9rem;
+              color: #64748b;
+              margin: 0.5rem 0;
+              font-style: italic;
+            }
+
+            .featherframe-image-credits {
+              margin-top: 1rem;
+              padding-top: 1rem;
+              border-top: 1px solid #e2e8f0;
+            }
+
+/* Habitat & Diet Grid */
+            .featherframe-habitat-diet-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+              gap: 1.5rem;
+            }
+
+            .featherframe-plumage-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+              gap: 1.5rem;
+            }
+
+            .featherframe-breeding-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+              gap: 1rem;
+            }
+
+            .featherframe-distribution-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+              gap: 1rem;
+            }
+
+            .featherframe-conservation-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+              gap: 1rem;
+            }
+
+            .featherframe-research-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+              gap: 1rem;
+            }
+
+            .featherframe-habitat-card,
+            .featherframe-diet-card,
+            .featherframe-plumage-card {
+              background: white;
+              padding: 1.5rem;
+              border-radius: 12px;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+              border: 1px solid #e5e7eb;
+              transition: all 0.3s ease;
+              position: relative;
+              overflow: hidden;
+            }
+
+            .featherframe-habitat-card::before,
+            .featherframe-diet-card::before,
+            .featherframe-plumage-card::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              height: 4px;
+              background: linear-gradient(90deg, #667eea, #764ba2);
+            }
+
+            .featherframe-habitat-card:hover,
+            .featherframe-diet-card:hover,
+            .featherframe-plumage-card:hover {
+              transform: translateY(-2px);
+              box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            }
+
+            .featherframe-habitat-card h5,
+            .featherframe-diet-card h5,
+            .featherframe-plumage-card h5 {
+              font-size: 1.1rem;
+              color: #333;
+              margin: 0 0 1rem 0;
+            }
+
+            .featherframe-habitat-card p,
+            .featherframe-diet-card p,
+            .featherframe-plumage-card p {
+              font-size: 1rem;
+              line-height: 1.6;
+              color: #555;
+              margin: 0;
+            }
+
+/* Behavior Grid */
+.featherframe-behavior-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+            .featherframe-behavior-item,
+            .featherframe-breeding-item,
+            .featherframe-distribution-item,
+            .featherframe-conservation-item,
+            .featherframe-research-item {
+              display: flex;
+              flex-direction: column;
+              gap: 0.5rem;
+            }
+
+            .featherframe-behavior-item label,
+            .featherframe-breeding-item label,
+            .featherframe-distribution-item label,
+            .featherframe-conservation-item label,
+            .featherframe-research-item label {
+              font-weight: 600;
+              color: #666;
+              font-size: 0.9rem;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+            }
+
+            .featherframe-behavior-item span,
+            .featherframe-breeding-item span,
+            .featherframe-distribution-item span,
+            .featherframe-conservation-item span,
+            .featherframe-research-item span {
+              font-size: 1.1rem;
+              color: #333;
+              font-weight: 500;
+            }
+
+/* Breeding & Distribution */
+.featherframe-breeding-text,
+.featherframe-distribution-text {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #555;
+  margin: 0;
+}
+
+/* Occurrences Grid */
+.featherframe-occurrences-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+            .featherframe-occurrence-card {
+              background: white;
+              padding: 1rem;
+              border-radius: 10px;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+              border: 1px solid #e5e7eb;
+              transition: all 0.3s ease;
+              position: relative;
+            }
+
+            .featherframe-occurrence-card::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              bottom: 0;
+              width: 4px;
+              background: linear-gradient(180deg, #10b981, #059669);
+              border-radius: 2px;
+            }
+
+            .featherframe-occurrence-card:hover {
+              transform: translateX(4px);
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+
+.featherframe-occurrence-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.featherframe-location-icon {
+  font-size: 1.2rem;
+}
+
+.featherframe-location-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.featherframe-occurrence-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Confidence Display */
+.featherframe-confidence-display {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+            .featherframe-confidence-bar {
+              width: 100%;
+              max-width: 400px;
+              height: 20px;
+              background: #e5e7eb;
+              border-radius: 10px;
+              overflow: hidden;
+              position: relative;
+              box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .featherframe-confidence-fill {
+              height: 100%;
+              background: linear-gradient(90deg, #10b981, #059669);
+              border-radius: 10px;
+              transition: width 1s ease-in-out;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            }
+
+.featherframe-confidence-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Objects Grid */
+.featherframe-objects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+            .featherframe-object-card {
+              background: white;
+              padding: 1rem;
+              border-radius: 10px;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+              border: 1px solid #e5e7eb;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              transition: all 0.3s ease;
+              position: relative;
+            }
+
+            .featherframe-object-card::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              height: 3px;
+              background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+              border-radius: 3px;
+            }
+
+            .featherframe-object-card:hover {
+              transform: translateY(-2px);
+              box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            }
+
+.featherframe-object-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.featherframe-object-confidence {
+  font-size: 0.9rem;
+  color: #666;
+  background: #f3f4f6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+}
+
+/* Responsive Design */
+            @media (max-width: 768px) {
+              .featherframe-bird-details-page {
+                padding: 1rem 0.5rem;
+              }
+
+              .featherframe-bird-image-container {
+                padding: 0.75rem;
+              }
+
+              .featherframe-bird-image-wrapper {
+                min-height: 250px;
+              }
+
+              .featherframe-bird-image {
+                max-height: 300px;
+              }
+
+              .featherframe-image-info h5 {
+                font-size: 1.3rem;
+              }
+  
+  .featherframe-page-header {
+    padding: 1.5rem 1rem;
+  }
+  
+  .featherframe-page-header h1 {
+    font-size: 2rem;
+  }
+  
+  .featherframe-back-button {
+    position: static;
+    transform: none;
+    margin-bottom: 1rem;
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .featherframe-bird-details-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .featherframe-info-grid,
+  .featherframe-habitat-diet-grid,
+  .featherframe-behavior-grid,
+  .featherframe-occurrences-grid,
+  .featherframe-objects-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .featherframe-bird-details-card {
+    padding: 1.5rem 1rem;
+  }
+  
+  .featherframe-info-section {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .featherframe-page-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .featherframe-bird-details-header h3 {
+    font-size: 1.5rem;
+  }
+  
+  .featherframe-section-header h4 {
+    font-size: 1.1rem;
+  }
+} 

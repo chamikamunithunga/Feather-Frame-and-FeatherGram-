@@ -1,0 +1,220 @@
+
+.cpm-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-overlay);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-index-modal-overlay);
+  animation: fadeIn var(--transition-normal);
+}
+
+.cpm-modal-content {
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp var(--transition-slow);
+}
+
+.cpm-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.cpm-modal-header h2 {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.cpm-close-button {
+  width: var(--spacing-2xl);
+  height: var(--spacing-2xl);
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cpm-close-button:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.cpm-create-post-form {
+  padding: var(--spacing-xl);
+}
+
+.cpm-form-group {
+  margin-bottom: var(--spacing-xl);
+}
+
+.cpm-form-group label {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.cpm-form-group textarea,
+.cpm-form-group input {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-md);
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  transition: all var(--transition-normal);
+}
+
+.cpm-form-group textarea:focus,
+.cpm-form-group input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-light);
+}
+
+.cpm-location-input {
+  position: relative;
+}
+
+.cpm-location-input i {
+  position: absolute;
+  left: var(--spacing-md);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+}
+
+.cpm-location-input input {
+  padding-left: calc(var(--spacing-md) + var(--spacing-xl));
+}
+
+.cpm-image-upload-area {
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-2xl);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.cpm-image-upload-area:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.cpm-upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--text-secondary);
+}
+
+.cpm-upload-placeholder i {
+  font-size: var(--font-size-3xl);
+  color: var(--color-primary);
+}
+
+.cpm-upload-hint {
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+}
+
+.cpm-image-preview {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.cpm-image-preview img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.cpm-remove-image {
+  position: absolute;
+  top: var(--spacing-xs);
+  right: var(--spacing-xs);
+  width: var(--spacing-2xl);
+  height: var(--spacing-2xl);
+  border-radius: 50%;
+  background: var(--bg-overlay);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-normal);
+}
+
+.cpm-remove-image:hover {
+  background: var(--bg-overlay-dark);
+}
+
+.cpm-form-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: flex-end;
+  margin-top: var(--spacing-2xl);
+}
+
+.cpm-cancel-btn,
+.cpm-post-btn {
+  padding: var(--spacing-sm) var(--spacing-xl);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.cpm-cancel-btn {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.cpm-cancel-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.cpm-post-btn {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+}
+
+.cpm-post-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.cpm-post-btn:disabled {
+  background: var(--bg-disabled);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Animations fadeIn and slideUp are defined in variables.css */ 

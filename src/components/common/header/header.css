@@ -1,0 +1,534 @@
+/* Professional White Navbar - Superb Design */
+header {
+  background: #ffffff;
+  height: 80px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+/* Container Layout */
+header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+}
+
+/* Logo Styling */
+header .logo {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+header .logo img {
+  width: 120px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+header .logo img:hover {
+  transform: scale(1.05);
+}
+
+/* Navigation Links */
+header .nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header .nav ul {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+header .nav ul li {
+  margin: 0;
+  padding: 0;
+}
+
+/* Professional Nav Links */
+.nav-link-animate {
+  position: relative;
+  color: #333333;
+  font-weight: 500;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.nav-link-animate::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #27ae60, #2ecc71);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  border-radius: 1px;
+}
+
+.nav-link-animate:hover {
+  color: #27ae60;
+  background: rgba(39, 174, 96, 0.05);
+}
+
+.nav-link-animate:hover::before {
+  width: 80%;
+}
+
+/* Profile Button */
+header .button {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+/* Sign In Button */
+.sign-in-btn {
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sign-in-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(39, 174, 96, 0.4);
+}
+
+.sign-in-btn:active {
+  transform: translateY(0);
+}
+
+/* Modern Profile Container */
+.profile-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Profile notification badge */
+.profile-container::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  border-radius: 50%;
+  border: 2px solid white;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+/* Show notification badge when user is authenticated */
+.profile-container.has-notifications::after {
+  opacity: 1;
+  transform: scale(1);
+  animation: pulseNotification 2s infinite;
+}
+
+@keyframes pulseNotification {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+/* Modern Profile Button */
+.profile-button {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 2px solid transparent;
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #495057;
+  font-size: 1.6rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #27ae60, #2ecc71, #58d68d);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+.profile-button:hover {
+  color: white;
+  transform: scale(1.08) rotate(-2deg);
+  box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
+  border-color: rgba(39, 174, 96, 0.3);
+}
+
+.profile-button:hover::before {
+  opacity: 1;
+}
+
+.profile-button:active {
+  transform: scale(0.95);
+}
+
+/* Modern profile icon animation */
+.profile-button svg {
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.profile-button:hover svg {
+  transform: scale(1.1);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* Custom Profile Icon Image */
+.profile-icon-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.profile-button:hover .profile-icon-img {
+  transform: scale(1.1);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2)) brightness(1.1);
+  border-color: rgba(255, 255, 255, 1);
+}
+
+/* Modern Profile Dropdown */
+.profile-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  min-width: 240px;
+  z-index: 1000;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  animation: modernDropdownSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.profile-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: 16px;
+  width: 16px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: none;
+  border-right: none;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+@keyframes modernDropdownSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9) rotateX(-10deg);
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+    filter: blur(0px);
+  }
+}
+
+/* Modern Dropdown Items */
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  color: #2c3e50;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  width: 100%;
+  text-align: left;
+  background: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+}
+
+.dropdown-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: linear-gradient(90deg, rgba(39, 174, 96, 0.1), rgba(46, 204, 113, 0.05));
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.dropdown-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.06), transparent);
+}
+
+.dropdown-item i {
+  margin-right: 1rem;
+  width: 18px;
+  height: 18px;
+  color: #7f8c8d;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown-item:hover {
+  color: #27ae60;
+  transform: translateX(4px);
+  background: rgba(39, 174, 96, 0.02);
+}
+
+.dropdown-item:hover::before {
+  width: 4px;
+}
+
+.dropdown-item:hover i {
+  color: #27ae60;
+  transform: scale(1.1);
+}
+
+.dropdown-item span {
+  margin-left: auto;
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  color: white;
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+  transition: all 0.3s ease;
+}
+
+.dropdown-item:hover span {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+}
+
+/* Mobile Toggle */
+header .toggle {
+  display: none;
+  align-items: center;
+}
+
+.amazing-toggle button {
+  background: #27ae60;
+  border: none;
+  border-radius: 8px;
+  width: 44px;
+  height: 44px;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.amazing-toggle button:hover {
+  background: #2ecc71;
+  transform: scale(1.05);
+}
+
+.amazing-toggle.open button {
+  background: #e74c3c;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 900px) {
+  header {
+    height: auto;
+    padding: 1rem 0;
+  }
+  
+  header .container {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+  
+  header .logo {
+    justify-content: center;
+  }
+  
+  header .logo img {
+    width: 100px;
+  }
+  
+  header .nav {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  header .nav ul.flex {
+    display: none;
+  }
+  
+  header .nav ul.small {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  header .nav ul.small li {
+    width: 100%;
+  }
+  
+  header .nav ul.small li a {
+    display: block;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    text-align: center;
+    margin: 0;
+  }
+  
+  header .button {
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+  
+  header .toggle {
+    display: flex;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+  
+  .profile-container {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .profile-dropdown {
+    position: static;
+    margin-top: 0.5rem;
+    width: 100%;
+    box-shadow: none;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* Scroll Effect */
+header.sticky {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus States for Accessibility */
+.nav-link-animate:focus,
+.sign-in-btn:focus,
+.profile-button:focus,
+.amazing-toggle button:focus {
+  outline: 2px solid #27ae60;
+  outline-offset: 2px;
+}
+
+/* Smooth transitions */
+* {
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Remove old gradient backgrounds */
+.navbar-gradient-bg,
+.navbar-glow {
+  display: none;
+}
+
+/* Remove old glassmorphism */
+.super-navbar {
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Clean up old animations - removed for professional design */
+
+/* Professional spacing */
+body {
+  padding-top: 80px;
+}
