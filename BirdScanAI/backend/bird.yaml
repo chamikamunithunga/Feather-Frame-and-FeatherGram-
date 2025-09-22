@@ -1,0 +1,6 @@
+path: /Users/chamikamunithunga/Desktop/project rise/BirdScanAI/backend/dataset
+train: images/train
+val: images/val
+
+nc: 1
+names: ['bird']

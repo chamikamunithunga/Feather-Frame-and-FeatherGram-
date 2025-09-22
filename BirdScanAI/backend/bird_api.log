@@ -1,0 +1,111 @@
+/Users/chamikamunithunga/Desktop/project rise/BirdScanAI/backend/bird-env/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/Users/chamikamunithunga/Desktop/project rise/BirdScanAI/backend/bird-env/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet50_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet50_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading YOLO model...
+YOLO model loaded successfully!
+Loading bird identification system...
+Loading pre-trained bird species classifier...
+Pre-trained ResNet50 bird classifier loaded successfully!
+ * Serving Flask app 'main'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.1.19:5001
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [21/Sep/2025 16:50:10] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [21/Sep/2025 16:50:13] "[33mGET /search-bird?name=African%20Grey%20Parrot HTTP/1.1[0m" 404 -
+127.0.0.1 - - [21/Sep/2025 16:50:30] "GET /search-bird?name=Gray%20Parrot HTTP/1.1" 200 -
+127.0.0.1 - - [21/Sep/2025 17:03:31] "GET /search-bird?name=Mango HTTP/1.1" 200 -
+127.0.0.1 - - [21/Sep/2025 17:55:58] "GET /search-bird?name=Mango HTTP/1.1" 200 -
+127.0.0.1 - - [21/Sep/2025 17:56:41] "GET /search-bird?name=Hummingbird HTTP/1.1" 200 -
+127.0.0.1 - - [21/Sep/2025 17:58:02] "GET /search-bird?name=Flamingo HTTP/1.1" 200 -
+127.0.0.1 - - [21/Sep/2025 17:59:39] "GET /search-bird?name=Flamingo HTTP/1.1" 200 -
+127.0.0.1 - - [21/Sep/2025 18:03:36] "GET /search-bird?name=Flamingo HTTP/1.1" 200 -
+127.0.0.1 - - [21/Sep/2025 18:12:40] "GET /search-bird?name=Flamingo HTTP/1.1" 200 -
+Ultralytics YOLOv8.0.0 🚀 Python-3.10.13 torch-2.7.1 CPU
+Fusing layers... 
+YOLOv8n summary: 168 layers, 3151904 parameters, 0 gradients, 8.7 GFLOPs
+image 1/1 /Users/chamikamunithunga/Desktop/new/BirdScanAI/backend/uploads/C4FEBF57-92A5-4333-92AF-3D474DC7AC75.jpg: 640x640 1 person, 69.7ms
+Speed: 1.9ms pre-process, 69.7ms inference, 21.9ms postprocess per image at shape (1, 3, 640, 640)
+127.0.0.1 - - [21/Sep/2025 18:49:43] "POST /detect-bird HTTP/1.1" 200 -
+Ultralytics YOLOv8.0.0 🚀 Python-3.10.13 torch-2.7.1 CPU
+Fusing layers... 
+YOLOv8n summary: 168 layers, 3151904 parameters, 0 gradients, 8.7 GFLOPs
+image 1/1 /Users/chamikamunithunga/Desktop/new/BirdScanAI/backend/uploads/C4FEBF57-92A5-4333-92AF-3D474DC7AC75.jpg: 640x640 1 person, 85.4ms
+Speed: 0.5ms pre-process, 85.4ms inference, 1.2ms postprocess per image at shape (1, 3, 640, 640)
+127.0.0.1 - - [21/Sep/2025 18:50:41] "POST /detect-bird HTTP/1.1" 200 -
+Ultralytics YOLOv8.0.0 🚀 Python-3.10.13 torch-2.7.1 CPU
+Fusing layers... 
+YOLOv8n summary: 168 layers, 3151904 parameters, 0 gradients, 8.7 GFLOPs
+image 1/1 /Users/chamikamunithunga/Desktop/new/BirdScanAI/backend/uploads/C4FEBF57-92A5-4333-92AF-3D474DC7AC75.jpg: 640x640 1 person, 87.1ms
+Speed: 0.5ms pre-process, 87.1ms inference, 1.3ms postprocess per image at shape (1, 3, 640, 640)
+127.0.0.1 - - [21/Sep/2025 18:50:55] "POST /detect-bird HTTP/1.1" 200 -
+Ultralytics YOLOv8.0.0 🚀 Python-3.10.13 torch-2.7.1 CPU
+Fusing layers... 
+YOLOv8n summary: 168 layers, 3151904 parameters, 0 gradients, 8.7 GFLOPs
+image 1/1 /Users/chamikamunithunga/Desktop/new/BirdScanAI/backend/uploads/C4FEBF57-92A5-4333-92AF-3D474DC7AC75.jpg: 640x640 1 person, 74.4ms
+Speed: 0.5ms pre-process, 74.4ms inference, 1.6ms postprocess per image at shape (1, 3, 640, 640)
+127.0.0.1 - - [21/Sep/2025 18:51:54] "POST /detect-bird HTTP/1.1" 200 -
+Ultralytics YOLOv8.0.0 🚀 Python-3.10.13 torch-2.7.1 CPU
+Fusing layers... 
+YOLOv8n summary: 168 layers, 3151904 parameters, 0 gradients, 8.7 GFLOPs
+image 1/1 /Users/chamikamunithunga/Desktop/new/BirdScanAI/backend/uploads/C4FEBF57-92A5-4333-92AF-3D474DC7AC75.jpg: 640x640 1 person, 75.0ms
+Speed: 0.7ms pre-process, 75.0ms inference, 1.2ms postprocess per image at shape (1, 3, 640, 640)
+127.0.0.1 - - [21/Sep/2025 18:53:02] "POST /detect-bird HTTP/1.1" 200 -
+Ultralytics YOLOv8.0.0 🚀 Python-3.10.13 torch-2.7.1 CPU
+Fusing layers... 
+YOLOv8n summary: 168 layers, 3151904 parameters, 0 gradients, 8.7 GFLOPs
+image 1/1 /Users/chamikamunithunga/Desktop/new/BirdScanAI/backend/uploads/C4FEBF57-92A5-4333-92AF-3D474DC7AC75.jpg: 640x640 1 person, 80.0ms
+Speed: 1.7ms pre-process, 80.0ms inference, 14.6ms postprocess per image at shape (1, 3, 640, 640)
+127.0.0.1 - - [21/Sep/2025 18:55:14] "POST /detect-bird HTTP/1.1" 200 -
+Signal received. 15 <frame at 0x142d19a40, file '/Users/chamikamunithunga/.pyenv/versions/3.10.13/lib/python3.10/selectors.py', line 416, code select>
+Detection result type: <class 'torch.Tensor'>
+Result is tensor with shape: torch.Size([1, 6])
+Parsing raw tensor detections: 1
+Total bird detections: 0
+All detected objects: [{'class': 'person', 'confidence': 0.9133431911468506}]
+No birds detected, but found high-confidence objects: [{'class': 'person', 'confidence': 0.9133431911468506}]
+Treating high-confidence object 'person' as potential bird
+Top species prediction: Worm-eating Warbler (confidence: 0.011)
+Detection result type: <class 'torch.Tensor'>
+Result is tensor with shape: torch.Size([1, 6])
+Parsing raw tensor detections: 1
+Total bird detections: 0
+All detected objects: [{'class': 'person', 'confidence': 0.9133431911468506}]
+No birds detected, but found high-confidence objects: [{'class': 'person', 'confidence': 0.9133431911468506}]
+Treating high-confidence object 'person' as potential bird
+Top species prediction: Worm-eating Warbler (confidence: 0.011)
+Detection result type: <class 'torch.Tensor'>
+Result is tensor with shape: torch.Size([1, 6])
+Parsing raw tensor detections: 1
+Total bird detections: 0
+All detected objects: [{'class': 'person', 'confidence': 0.9133431911468506}]
+No birds detected, but found high-confidence objects: [{'class': 'person', 'confidence': 0.9133431911468506}]
+Treating high-confidence object 'person' as potential bird
+Top species prediction: Worm-eating Warbler (confidence: 0.011)
+Detection result type: <class 'torch.Tensor'>
+Result is tensor with shape: torch.Size([1, 6])
+Parsing raw tensor detections: 1
+Total bird detections: 0
+All detected objects: [{'class': 'person', 'confidence': 0.9133431911468506}]
+No birds detected, but found high-confidence objects: [{'class': 'person', 'confidence': 0.9133431911468506}]
+Treating high-confidence object 'person' as potential bird
+Top species prediction: Worm-eating Warbler (confidence: 0.011)
+Detection result type: <class 'torch.Tensor'>
+Result is tensor with shape: torch.Size([1, 6])
+Parsing raw tensor detections: 1
+Total bird detections: 0
+All detected objects: [{'class': 'person', 'confidence': 0.9133431911468506}]
+No birds detected, but found high-confidence objects: [{'class': 'person', 'confidence': 0.9133431911468506}]
+Treating high-confidence object 'person' as potential bird
+Top species prediction: Worm-eating Warbler (confidence: 0.011)
+Detection result type: <class 'torch.Tensor'>
+Result is tensor with shape: torch.Size([1, 6])
+Parsing raw tensor detections: 1
+Total bird detections: 0
+All detected objects: [{'class': 'person', 'confidence': 0.9133431911468506}]
+No birds detected, but found high-confidence objects: [{'class': 'person', 'confidence': 0.9133431911468506}]
+Treating high-confidence object 'person' as potential bird
+Top species prediction: Worm-eating Warbler (confidence: 0.011)
