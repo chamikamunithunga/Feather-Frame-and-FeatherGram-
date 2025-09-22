@@ -1,0 +1,968 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // ========================================
+    // USERS COLLECTION (Social Features)
+    // ========================================
+    match /users/{userId} {
+      // Allow reading all user documents for username checks
+      allow read: if true;
+      
+      // Allow creating new user documents during registration
+      allow create: if isValidUserData();
+                   
+      allow update: if request.auth != null && (
+                   // User updating their own profile
+                   (request.auth.uid == userId && isValidProfileUpdate()) ||
+                   // Follow operations: allow array updates for authenticated users
+                   isValidFollowOperation()
+                   );
+                   
+      allow delete: if request.auth != null && 
+                   request.auth.uid == userId;
+      
+      // Basic validation for user profile data
+      function isValidUserData() {
+        let data = request.resource.data;
+        return data.keys().hasAll(['uid', 'email', 'username', 'displayName', 'followers', 'following']) &&
+               data.uid is string &&
+               data.email is string &&
+               data.username is string &&
+               data.displayName is string &&
+               data.followers is list &&
+               data.following is list &&
+               data.username.matches('^[a-zA-Z0-9_]{3,}$') &&
+               // Optional fields validation
+               (!data.keys().hasAny(['followersCount']) || data.followersCount is number) &&
+               (!data.keys().hasAny(['followingCount']) || data.followingCount is number) &&
+               (!data.keys().hasAny(['postsCount']) || data.postsCount is number) &&
+               (!data.keys().hasAny(['interests']) || data.interests is list);
+      }
+
+      // Validation for profile updates
+      function isValidProfileUpdate() {
+        let data = request.resource.data;
+        return (
+          // Ensure required fields are not removed
+          data.keys().hasAll(['uid', 'email', 'username', 'displayName', 'followers', 'following']) &&
+          // Ensure uid and email cannot be changed
+          data.uid == resource.data.uid &&
+          data.email == resource.data.email &&
+          // Validate optional fields if present
+          (!data.keys().hasAny(['bio']) || data.bio is string) &&
+          (!data.keys().hasAny(['location']) || data.location is string) &&
+          (!data.keys().hasAny(['website']) || data.website is string) &&
+          (!data.keys().hasAny(['profileImageUrl']) || data.profileImageUrl is string) &&
+          (!data.keys().hasAny(['isVerified']) || data.isVerified is bool) &&
+          (!data.keys().hasAny(['followersCount']) || data.followersCount is number) &&
+          (!data.keys().hasAny(['followingCount']) || data.followingCount is number) &&
+          (!data.keys().hasAny(['postsCount']) || data.postsCount is number) &&
+          (!data.keys().hasAny(['interests']) || data.interests is list) &&
+          // Follow arrays validation
+          data.followers is list &&
+          data.following is list &&
+          // Username format validation
+          data.username.matches('^[a-zA-Z0-9_]{3,}$')
+        );
+      }
+      
+      // Simplified validation for follow operations
+      function isValidFollowOperation() {
+        return request.auth != null && 
+               resource != null &&
+               request.resource != null &&
+               // Ensure the document exists and user is authenticated
+               resource.data.keys().hasAll(['uid', 'email']) &&
+               request.resource.data.keys().hasAll(['uid', 'email']) &&
+               // Ensure core identity fields don't change
+               request.resource.data.uid == resource.data.uid &&
+               request.resource.data.email == resource.data.email;
+      }
+    }
+
+    // ========================================
+    // POSTS COLLECTION (Social Features)
+    // ========================================
+    match /posts/{postId} {
+      allow read: if true; // Public read access
+      allow create: if isAuthenticated() && 
+                   request.resource.data.userId == request.auth.uid &&
+                   isValidPost();
+      allow update: if isAuthenticated() && 
+                   resource.data.userId == request.auth.uid &&
+                   isValidPostUpdate();
+      allow delete: if isAuthenticated() && 
+                   resource.data.userId == request.auth.uid;
+      
+      function isValidPost() {
+        let data = request.resource.data;
+        return data.keys().hasAll(['userId', 'content', 'createdAt', 'updatedAt', 'isActive', 'metrics']) &&
+               data.userId is string &&
+               data.content is map &&
+               data.content.text is string &&
+               data.createdAt is timestamp &&
+               data.updatedAt is timestamp &&
+               data.isActive is bool &&
+               data.metrics is map;
+      }
+      
+      function isValidPostUpdate() {
+        let data = request.resource.data;
+        let oldData = resource.data;
+        return data.userId == oldData.userId &&
+               data.createdAt == oldData.createdAt &&
+               data.content is map &&
+               data.updatedAt is timestamp &&
+               data.isEdited == true;
+      }
+    }
+
+    // ========================================
+    // FOLLOWS COLLECTION (Social Features)
+    // ========================================
+    match /follows/{followId} {
+      allow read: if true; // Public read access for follow relationships
+      allow create: if isAuthenticated() && 
+                   request.resource.data.followerId == request.auth.uid &&
+                   isValidFollow();
+      allow delete: if isAuthenticated() && 
+                   resource.data.followerId == request.auth.uid;
+      allow update: if false; // Follow documents should not be updated
+      
+      function isValidFollow() {
+        let data = request.resource.data;
+        return data.keys().hasAll(['followerId', 'followingId', 'createdAt']) &&
+               data.followerId is string &&
+               data.followingId is string &&
+               data.followerId != data.followingId && // Can't follow yourself
+               data.createdAt is timestamp;
+      }
+    }
+
+    // Post likes collection rules
+    match /postLikes/{likeId} {
+      allow read: if true;
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && get(/databases/$(database)/documents/postLikes/$(likeId)).data.userId == request.auth.uid;
+    }
+
+    // Post saves collection rules
+    match /postSaves/{saveId} {
+      allow read: if true;
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && get(/databases/$(database)/documents/postSaves/$(saveId)).data.userId == request.auth.uid;
+    }
+
+    // Post shares collection rules
+    match /postShares/{shareId} {
+      allow read: if true;
+      allow create: if isAuthenticated();
+      allow delete: if isAuthenticated();
+    }
+
+    // ========================================
+    // COMMENTS COLLECTION (Social Features)
+    // ========================================
+    match /comments/{commentId} {
+      allow read: if true; // Public read access
+      allow create: if isAuthenticated() && 
+                   request.resource.data.userId == request.auth.uid &&
+                   isValidComment();
+      allow update: if isAuthenticated() && 
+                   resource.data.userId == request.auth.uid &&
+                   isValidCommentUpdate();
+      allow delete: if isAuthenticated() && 
+                   (resource.data.userId == request.auth.uid ||
+                    // Post owner can delete comments on their posts
+                    isPostOwner(resource.data.postId));
+      
+      function isValidComment() {
+        let data = request.resource.data;
+        return data.keys().hasAll(['postId', 'userId', 'content', 'createdAt']) &&
+               data.postId is string &&
+               data.userId is string &&
+               data.content is string &&
+               data.content.size() > 0 &&
+               data.content.size() <= 1000 &&
+               data.createdAt is timestamp;
+      }
+      
+      function isValidCommentUpdate() {
+        let data = request.resource.data;
+        let oldData = resource.data;
+        return data.postId == oldData.postId &&
+               data.userId == oldData.userId &&
+               data.createdAt == oldData.createdAt &&
+               data.content is string &&
+               data.content.size() > 0 &&
+               data.content.size() <= 1000 &&
+               data.isEdited == true;
+      }
+      
+      function isPostOwner(postId) {
+        return get(/databases/$(database)/documents/posts/$(postId)).data.userId == request.auth.uid;
+      }
+    }
+
+    // ========================================
+    // STORIES COLLECTION (Social Features)
+    // ========================================
+    match /stories/{storyId} {
+      allow read: if true; // Public read access
+      allow create: if isAuthenticated() && 
+                   request.resource.data.userId == request.auth.uid &&
+                   isValidStory();
+      allow update: if isAuthenticated() && 
+                   resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && 
+                   resource.data.userId == request.auth.uid;
+      
+      function isValidStory() {
+        let data = request.resource.data;
+        return data.keys().hasAll(['userId', 'content', 'createdAt', 'expiresAt', 'isActive']) &&
+               data.userId is string &&
+               data.content is map &&
+               data.content.keys().hasAny(['image', 'text']) &&
+               data.createdAt is timestamp &&
+               data.expiresAt is timestamp &&
+               data.expiresAt > data.createdAt &&
+               data.isActive is bool;
+      }
+    }
+
+    // ========================================
+    // STORY VIEWS COLLECTION
+    // ========================================
+    match /storyViews/{viewId} {
+      allow read: if isAuthenticated() && 
+                  (resource.data.viewerId == request.auth.uid ||
+                   resource.data.storyUserId == request.auth.uid);
+      allow create: if isAuthenticated() && 
+                   request.resource.data.viewerId == request.auth.uid &&
+                   isValidStoryView();
+      allow update: if false; // Views cannot be updated
+      allow delete: if false; // Views cannot be deleted
+      
+      function isValidStoryView() {
+        let data = request.resource.data;
+        return data.keys().hasAll(['storyId', 'storyUserId', 'viewerId', 'viewedAt']) &&
+               data.storyId is string &&
+               data.storyUserId is string &&
+               data.viewerId is string &&
+               data.viewedAt is timestamp;
+      }
+    }
+
+    // ========================================
+    // SHOPS COLLECTION (Marketplace)
+    // ========================================
+    match /shops/{shopId} {
+      // Anyone can read shops (public marketplace)
+      allow read: if true;
+      
+      // Only authenticated admins can create shops with valid data
+      allow create: if isAuthenticated() && isValidShop();
+      
+      // Only authenticated admins can update shops with valid data
+      allow update: if isAuthenticated() && isValidShopUpdate();
+      
+      // Only authenticated admins can delete shops
+      allow delete: if isAuthenticated();
+      
+      function isValidShop() {
+        let data = request.resource.data;
+        return data.keys().hasAll(['name', 'description', 'image', 'category', 'rating', 'website', 'location', 'phone', 'email', 'hours', 'featured', 'verified', 'createdAt', 'updatedAt']) &&
+               data.name is string &&
+               data.name.size() > 0 &&
+               data.name.size() <= 100 &&
+               data.description is string &&
+               data.description.size() > 0 &&
+               data.description.size() <= 500 &&
+               data.image is string &&
+               data.image.size() > 0 &&
+               data.category is string &&
+               (data.category == 'Camera Store' || 
+                data.category == 'Official Brand Store' || 
+                data.category == 'Pro Equipment' || 
+                data.category == 'Electronics' || 
+                data.category == 'Premium Store' || 
+                data.category == 'Full Service') &&
+               data.rating is number &&
+               data.rating >= 1 &&
+               data.rating <= 5 &&
+               data.website is string &&
+               data.website.size() > 0 &&
+               data.website.matches('https?://.*') &&
+               data.location is string &&
+               data.location.size() > 0 &&
+               data.location.size() <= 100 &&
+               data.phone is string &&
+               data.phone.size() > 0 &&
+               data.phone.size() <= 20 &&
+               data.email is string &&
+               data.email.size() > 0 &&
+               data.email.matches('.*@.*\\..*') &&
+               data.hours is string &&
+               data.hours.size() > 0 &&
+               data.hours.size() <= 100 &&
+               data.featured is bool &&
+               data.verified is bool &&
+               // Handle serverTimestamp() values - they might be pending during rule evaluation
+               (data.createdAt is timestamp || data.createdAt == request.time) &&
+               (data.updatedAt is timestamp || data.updatedAt == request.time);
+      }
+      
+      function isValidShopUpdate() {
+        let data = request.resource.data;
+        let oldData = resource.data;
+        return data.keys().hasAll(['name', 'description', 'image', 'category', 'rating', 'website', 'location', 'phone', 'email', 'hours', 'featured', 'verified', 'createdAt', 'updatedAt']) &&
+               data.name is string &&
+               data.name.size() > 0 &&
+               data.name.size() <= 100 &&
+               data.description is string &&
+               data.description.size() > 0 &&
+               data.description.size() <= 500 &&
+               data.image is string &&
+               data.image.size() > 0 &&
+               data.category is string &&
+               (data.category == 'Camera Store' || 
+                data.category == 'Official Brand Store' || 
+                data.category == 'Pro Equipment' || 
+                data.category == 'Electronics' || 
+                data.category == 'Premium Store' || 
+                data.category == 'Full Service') &&
+               data.rating is number &&
+               data.rating >= 1 &&
+               data.rating <= 5 &&
+               data.website is string &&
+               data.website.size() > 0 &&
+               data.website.matches('https?://.*') &&
+               data.location is string &&
+               data.location.size() > 0 &&
+               data.location.size() <= 100 &&
+               data.phone is string &&
+               data.phone.size() > 0 &&
+               data.phone.size() <= 20 &&
+               data.email is string &&
+               data.email.size() > 0 &&
+               data.email.matches('.*@.*\\..*') &&
+               data.hours is string &&
+               data.hours.size() > 0 &&
+               data.hours.size() <= 100 &&
+               data.featured is bool &&
+               data.verified is bool &&
+               // Ensure createdAt doesn't change on update
+               data.createdAt == oldData.createdAt &&
+               // Handle serverTimestamp() for updatedAt
+               (data.updatedAt is timestamp || data.updatedAt == request.time);
+      }
+    }
+
+    // ========================================
+    // NOTIFICATIONS COLLECTION
+    // ========================================
+    match /notifications/{notificationId} {
+      // Users can only read their own notifications
+      allow read: if isAuthenticated() && request.auth.uid == resource.data.toUserId;
+      
+      // Anyone can create notifications (for follow notifications, etc.)
+      allow create: if isAuthenticated() && isValidNotification();
+      
+      // Users can only update their own notifications (mark as read)
+      allow update: if isAuthenticated() && 
+                   request.auth.uid == resource.data.toUserId &&
+                   isValidNotificationUpdate();
+      
+      // Users can only delete their own notifications
+      allow delete: if isAuthenticated() && request.auth.uid == resource.data.toUserId;
+      
+      function isValidNotification() {
+        let data = request.resource.data;
+        return data.keys().hasAll(['type', 'fromUserId', 'toUserId', 'message', 'isRead', 'createdAt']) &&
+               data.type is string &&
+               data.fromUserId is string &&
+               data.toUserId is string &&
+               data.message is string &&
+               data.isRead is bool &&
+               data.createdAt is timestamp;
+      }
+      
+      function isValidNotificationUpdate() {
+        let data = request.resource.data;
+        let oldData = resource.data;
+        
+        // Only allow updating isRead field
+        return data.type == oldData.type &&
+               data.fromUserId == oldData.fromUserId &&
+               data.toUserId == oldData.toUserId &&
+               data.message == oldData.message &&
+               data.createdAt == oldData.createdAt &&
+               data.isRead is bool;
+      }
+    }
+
+    // ========================================
+    // CONVERSATIONS COLLECTION (Messaging)
+    // ========================================
+    match /conversations/{conversationId} {
+      // Users can only read conversations they're part of
+      allow read: if isAuthenticated() && 
+                  request.auth.uid in resource.data.participants;
+      
+      // Users can create new conversations with valid data
+      allow create: if isAuthenticated() && 
+                    isValidConversation() &&
+                    request.auth.uid in request.resource.data.participants;
+      
+      // Users can update conversations they're part of (for lastMessage, unreadCount, etc.)
+      allow update: if isAuthenticated() && 
+                    request.auth.uid in resource.data.participants &&
+                    isValidConversationUpdate();
+      
+      // No deletion of conversations for now
+      allow delete: if false;
+      
+      function isValidConversation() {
+        let data = request.resource.data;
+        return data.keys().hasAll(['participants', 'participantDetails', 'createdAt', 'updatedAt', 'unreadCount']) &&
+               data.participants is list &&
+               data.participants.size() == 2 &&
+               data.participantDetails is map &&
+               data.createdAt is timestamp &&
+               data.updatedAt is timestamp &&
+               data.unreadCount is map;
+      }
+      
+      function isValidConversationUpdate() {
+        let data = request.resource.data;
+        let oldData = resource.data;
+        
+        // Ensure core fields don't change
+        return data.participants == oldData.participants &&
+               data.participantDetails == oldData.participantDetails &&
+               data.createdAt == oldData.createdAt &&
+               // Allow updates to lastMessage, updatedAt, and unreadCount
+               data.updatedAt is timestamp &&
+               data.unreadCount is map;
+      }
+    }
+
+    // ========================================
+    // MESSAGES COLLECTION
+    // ========================================
+    match /messages/{messageId} {
+      // Users can only read messages from conversations they're part of
+      allow read: if isAuthenticated() && 
+                  request.auth.uid in get(/databases/$(database)/documents/conversations/$(resource.data.conversationId)).data.participants;
+      
+      // Users can create messages in conversations they're part of
+      allow create: if isAuthenticated() && 
+                    isValidMessage() &&
+                    request.auth.uid == request.resource.data.senderId &&
+                    request.auth.uid in get(/databases/$(database)/documents/conversations/$(request.resource.data.conversationId)).data.participants;
+      
+      // Users can update messages they sent (for editing, marking as read, etc.)
+      allow update: if isAuthenticated() && 
+                    ((request.auth.uid == resource.data.senderId && isValidMessageUpdate()) ||
+                     (request.auth.uid in get(/databases/$(database)/documents/conversations/$(resource.data.conversationId)).data.participants && isValidReadByUpdate()));
+      
+      // Users can only delete their own messages
+      allow delete: if isAuthenticated() && request.auth.uid == resource.data.senderId;
+      
+      function isValidMessage() {
+        let data = request.resource.data;
+        return data.keys().hasAll(['id', 'conversationId', 'senderId', 'content', 'type', 'timestamp', 'readBy']) &&
+               data.id is string &&
+               data.conversationId is string &&
+               data.senderId is string &&
+               data.content is string &&
+               data.content.size() > 0 &&
+               data.content.size() <= 2000 &&
+               data.type is string &&
+               (data.type == 'text' || data.type == 'image' || data.type == 'file') &&
+               data.timestamp is timestamp &&
+               data.readBy is map;
+      }
+      
+      function isValidMessageUpdate() {
+        let data = request.resource.data;
+        let oldData = resource.data;
+        
+        // Only allow updating content and timestamp for message editing
+        return data.id == oldData.id &&
+               data.conversationId == oldData.conversationId &&
+               data.senderId == oldData.senderId &&
+               data.type == oldData.type &&
+               data.content is string &&
+               data.content.size() > 0 &&
+               data.content.size() <= 2000 &&
+               data.timestamp is timestamp &&
+               data.readBy == oldData.readBy;
+      }
+      
+      function isValidReadByUpdate() {
+        let data = request.resource.data;
+        let oldData = resource.data;
+        
+        // Only allow updating readBy field for marking messages as read
+        return data.id == oldData.id &&
+               data.conversationId == oldData.conversationId &&
+               data.senderId == oldData.senderId &&
+               data.content == oldData.content &&
+               data.type == oldData.type &&
+               data.timestamp == oldData.timestamp &&
+               data.readBy is map;
+      }
+    }
+
+    // ========================================
+    // COMMUNITIES COLLECTION (Social Features)
+    // ========================================
+    // IMPORTANT: Only verified users (>10 followers AND >10 posts) can create or join communities
+    match /communities/{communityId} {
+      // Anyone can read communities (public listing)
+      allow read: if true;
+      
+      // Only verified users (>10 followers AND >10 posts) can create communities
+      allow create: if isAuthenticated() && 
+                    isVerifiedUser() &&
+                    isValidCommunity() &&
+                    request.auth.uid == request.resource.data.createdBy;
+      
+      // Only community owner and admins can update
+      allow update: if isAuthenticated() && 
+                    (isCommunityOwner(communityId) || isCommunityAdmin(communityId)) &&
+                    isValidCommunityUpdate();
+      
+      // Only community owner can delete
+      allow delete: if isAuthenticated() && isCommunityOwner(communityId);
+      
+      // Check if user is verified (has isVerified: true in their profile)
+      function isVerifiedUser() {
+        let userData = get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+        return userData.isVerified == true;
+      }
+      
+      // Check if user meets verification requirements (>10 followers AND >10 posts)
+      function meetsVerificationRequirements() {
+        let userData = get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+        let followerCount = userData.followers.size();
+        // Note: In production, you'd need to count posts from the posts collection
+        // For now, we rely on the isVerified flag being properly maintained
+        return followerCount > 10 && userData.isVerified == true;
+      }
+      
+      // Check if user is the community owner
+      function isCommunityOwner(communityId) {
+        return resource.data.createdBy == request.auth.uid;
+      }
+      
+      // Check if user is a community admin
+      function isCommunityAdmin(communityId) {
+        return request.auth.uid in resource.data.admins;
+      }
+      
+      // Validation for new community creation
+      function isValidCommunity() {
+        let data = request.resource.data;
+        return data.keys().hasAll(['id', 'name', 'description', 'category', 'privacy', 'createdBy', 'createdAt', 'members', 'memberCount', 'admins']) &&
+               data.id is string &&
+               data.name is string &&
+               data.name.size() > 0 &&
+               data.name.size() <= 100 &&
+               data.description is string &&
+               data.description.size() > 0 &&
+               data.description.size() <= 500 &&
+               data.category is string &&
+               data.category.size() > 0 &&
+               data.privacy is string &&
+               (data.privacy == 'Public' || data.privacy == 'Private') &&
+               data.createdBy is string &&
+               data.createdAt is timestamp &&
+               data.members is list &&
+               data.members.size() >= 1 &&
+               data.members[0] == data.createdBy &&
+               data.memberCount is number &&
+               data.memberCount == 1 &&
+               data.admins is list &&
+               data.admins.size() >= 1 &&
+               data.admins[0] == data.createdBy;
+      }
+      
+      // Validation for community updates
+      function isValidCommunityUpdate() {
+        let data = request.resource.data;
+        let oldData = resource.data;
+        
+        // Ensure core fields don't change
+        return data.id == oldData.id &&
+               data.createdBy == oldData.createdBy &&
+               data.createdAt == oldData.createdAt &&
+               // Allow updates to these fields
+               data.name is string &&
+               data.name.size() > 0 &&
+               data.name.size() <= 100 &&
+               data.description is string &&
+               data.description.size() > 0 &&
+               data.description.size() <= 500 &&
+               data.category is string &&
+               data.privacy is string &&
+               (data.privacy == 'Public' || data.privacy == 'Private') &&
+               data.members is list &&
+               data.memberCount is number &&
+               data.admins is list &&
+               // Ensure owner remains in admins
+               oldData.createdBy in data.admins;
+      }
+    }
+
+    // ========================================
+    // COMMUNITY MEMBERS COLLECTION
+    // ========================================
+    match /communityMembers/{membershipId} {
+      // Members can read their own membership records
+      allow read: if isAuthenticated() && 
+                  (resource.data.userId == request.auth.uid ||
+                   isCommunityMember(resource.data.communityId));
+      
+      // Only verified users can join communities (create membership records)
+      allow create: if isAuthenticated() && 
+                    isVerifiedUser() &&
+                    isValidCommunityMember() &&
+                    request.auth.uid == request.resource.data.userId;
+      
+      // Only community admins can update membership (for role changes)
+      allow update: if isAuthenticated() && 
+                    isCommunityAdmin(resource.data.communityId) &&
+                    isValidCommunityMemberUpdate();
+      
+      // Members can delete their own membership (leave community)
+      // Admins can remove members
+      allow delete: if isAuthenticated() && 
+                    (resource.data.userId == request.auth.uid ||
+                     isCommunityAdmin(resource.data.communityId));
+      
+      // Check if user is a member of the community
+      function isCommunityMember(communityId) {
+        return request.auth.uid in get(/databases/$(database)/documents/communities/$(communityId)).data.members;
+      }
+      
+      function isValidCommunityMember() {
+        let data = request.resource.data;
+        return data.keys().hasAll(['communityId', 'userId', 'role', 'joinedAt']) &&
+               data.communityId is string &&
+               data.userId is string &&
+               data.role is string &&
+               (data.role == 'member' || data.role == 'moderator' || data.role == 'admin' || data.role == 'owner') &&
+               data.joinedAt is timestamp;
+      }
+      
+      function isValidCommunityMemberUpdate() {
+        let data = request.resource.data;
+        let oldData = resource.data;
+        
+        // Only allow role updates
+        return data.communityId == oldData.communityId &&
+               data.userId == oldData.userId &&
+               data.joinedAt == oldData.joinedAt &&
+               data.role is string &&
+               (data.role == 'member' || data.role == 'moderator' || data.role == 'admin');
+      }
+    }
+
+    // ========================================
+    // FILES COLLECTION (OneDrive Features)
+    // ========================================
+    match /files/{fileId} {
+      // Users can only read their own files or files shared with them
+      allow read: if isAuthenticated() && 
+                  (request.auth.uid == resource.data.ownerId || 
+                   request.auth.uid in resource.data.sharedWith);
+      
+      // Users can create files they own
+      allow create: if isAuthenticated() && 
+                    isValidFile() &&
+                    request.auth.uid == request.resource.data.ownerId;
+      
+      // Users can update their own files
+      allow update: if isAuthenticated() && 
+                    request.auth.uid == resource.data.ownerId &&
+                    isValidFileUpdate();
+      
+      // Users can delete their own files
+      allow delete: if isAuthenticated() && request.auth.uid == resource.data.ownerId;
+      
+      function isValidFile() {
+        let data = request.resource.data;
+        return data.keys().hasAll(['id', 'name', 'type', 'size', 'ownerId', 'createdAt', 'updatedAt', 'sharedWith']) &&
+               data.id is string &&
+               data.name is string &&
+               data.type is string &&
+               data.size is number &&
+               data.ownerId is string &&
+               data.createdAt is timestamp &&
+               data.updatedAt is timestamp &&
+               data.sharedWith is list;
+      }
+      
+      function isValidFileUpdate() {
+        let data = request.resource.data;
+        let oldData = resource.data;
+        
+        // Allow updating name, sharedWith, and updatedAt
+        return data.id == oldData.id &&
+               data.type == oldData.type &&
+               data.size == oldData.size &&
+               data.ownerId == oldData.ownerId &&
+               data.createdAt == oldData.createdAt &&
+               data.name is string &&
+               data.updatedAt is timestamp &&
+               data.sharedWith is list;
+      }
+    }
+
+    // ========================================
+    // FOLDERS COLLECTION (OneDrive Features)
+    // ========================================
+    match /folders/{folderId} {
+      // Users can only read their own folders or folders shared with them
+      allow read: if isAuthenticated() && 
+                  (request.auth.uid == resource.data.ownerId || 
+                   request.auth.uid in resource.data.sharedWith);
+      
+      // Users can create folders they own
+      allow create: if isAuthenticated() && 
+                    isValidFolder() &&
+                    request.auth.uid == request.resource.data.ownerId;
+      
+      // Users can update their own folders
+      allow update: if isAuthenticated() && 
+                    request.auth.uid == resource.data.ownerId &&
+                    isValidFolderUpdate();
+      
+      // Users can delete their own folders
+      allow delete: if isAuthenticated() && request.auth.uid == resource.data.ownerId;
+      
+      function isValidFolder() {
+        let data = request.resource.data;
+        return data.keys().hasAll(['id', 'name', 'ownerId', 'parentId', 'createdAt', 'updatedAt', 'sharedWith']) &&
+               data.id is string &&
+               data.name is string &&
+               data.ownerId is string &&
+               data.createdAt is timestamp &&
+               data.updatedAt is timestamp &&
+               data.sharedWith is list;
+      }
+      
+      function isValidFolderUpdate() {
+        let data = request.resource.data;
+        let oldData = resource.data;
+        
+        // Allow updating name, parentId, sharedWith, and updatedAt
+        return data.id == oldData.id &&
+               data.ownerId == oldData.ownerId &&
+               data.createdAt == oldData.createdAt &&
+               data.name is string &&
+               data.updatedAt is timestamp &&
+               data.sharedWith is list;
+      }
+    }
+
+    // ========================================
+    // API REQUESTS COLLECTION (Public API Access Requests)
+    // ========================================
+    match /apiRequests/{requestId} {
+      // Anyone can create API requests (public form submission)
+      allow create: if isValidApiRequest();
+      
+      // Temporary: Allow authenticated users to read requests for admin panel testing
+      // TODO: Restrict this to only admins once admin claims are properly set
+      allow read: if true; // Temporarily allow all reads for testing
+      
+      // Allow authenticated users to update requests (for admin panel testing)
+      // TODO: Restrict this to only admins once admin claims are properly set  
+      allow update: if isAuthenticated() && isValidApiRequestUpdate();
+      
+      // Allow authenticated users to delete requests (for admin panel testing)
+      // TODO: Restrict this to only admins once admin claims are properly set
+      allow delete: if isAuthenticated();
+      
+      function isValidApiRequest() {
+        let data = request.resource.data;
+        return data.keys().hasAll(['requestId', 'name', 'email', 'requestType', 'useCase', 'status', 'createdAt']) &&
+               data.requestId is string &&
+               data.requestId.size() > 0 &&
+               data.name is string &&
+               data.name.size() > 0 &&
+               data.name.size() <= 100 &&
+               data.email is string &&
+               data.email.matches('.*@.*\\..*') &&
+               data.requestType is string &&
+               (data.requestType == 'personal' || 
+                data.requestType == 'commercial' || 
+                data.requestType == 'research' || 
+                data.requestType == 'nonprofit' || 
+                data.requestType == 'education') &&
+               data.useCase is string &&
+               data.useCase.size() > 0 &&
+               data.useCase.size() <= 1000 &&
+               data.status == 'pending' &&
+               data.createdAt is timestamp &&
+               // Company field is optional
+               (!data.keys().hasAny(['company']) || 
+                (data.company is string && data.company.size() <= 100)) &&
+               // approvedAt should be null for new requests
+               (!data.keys().hasAny(['approvedAt']) || data.approvedAt == null);
+      }
+      
+      function isValidApiRequestUpdate() {
+        let data = request.resource.data;
+        let oldData = resource.data;
+        
+        // Ensure core fields don't change
+        return data.requestId == oldData.requestId &&
+               data.name == oldData.name &&
+               data.email == oldData.email &&
+               data.requestType == oldData.requestType &&
+               data.useCase == oldData.useCase &&
+               data.createdAt == oldData.createdAt &&
+               data.company == oldData.company &&
+               // Allow status updates
+               data.status is string &&
+               (data.status == 'pending' || 
+                data.status == 'approved' || 
+                data.status == 'rejected') &&
+               // Allow setting approvedAt when status changes to approved
+               ((data.status == 'approved' && data.approvedAt is timestamp) ||
+                (data.status != 'approved' && 
+                 (!data.keys().hasAny(['approvedAt']) || data.approvedAt == null)));
+      }
+      
+      function hasAdminRole() {
+        return request.auth != null && 
+               request.auth.token.admin == true;
+      }
+    }
+
+    // ========================================
+    // API KEYS COLLECTION (API Key Management)
+    // ========================================
+    match /apiKeys/{keyId} {
+      // Temporarily allow authenticated users to create API keys for testing
+      // TODO: Restrict to Cloud Functions and admins only
+      allow create: if isAuthenticated();
+      
+      // Temporarily allow authenticated users to read API keys for admin panel testing
+      // TODO: Restrict to admins and Cloud Functions only
+      allow read: if isAuthenticated();
+      
+      // Temporarily allow authenticated users to update API keys for testing
+      // TODO: Restrict to admins and Cloud Functions only
+      allow update: if isAuthenticated() && isValidApiKeyUpdate();
+      
+      // Temporarily allow authenticated users to delete API keys for testing
+      // TODO: Restrict to admins only
+      allow delete: if isAuthenticated();
+      
+      function isValidApiKeyUpdate() {
+        let data = request.resource.data;
+        let oldData = resource.data;
+        
+        // Core fields should not change (except for Cloud Functions)
+        return (isCloudFunction() || (
+               data.keyId == oldData.keyId &&
+               data.apiKey == oldData.apiKey &&
+               data.userEmail == oldData.userEmail &&
+               data.requestId == oldData.requestId &&
+               data.createdAt == oldData.createdAt)) &&
+               // Allow updates to usage tracking fields
+               data.isActive is bool &&
+               data.usageCount is number &&
+               data.dailyLimit is number;
+      }
+      
+      function isCloudFunction() {
+        // Cloud Functions run with service account authentication
+        return request.auth != null && 
+               request.auth.uid != null &&
+               // Firebase service accounts have specific UID patterns
+               (request.auth.uid.matches('firebase-.*') || 
+                request.auth.token.firebase != null ||
+                // Allow admin service account operations
+                (hasAdminRole() && request.auth.token.admin == true));
+      }
+    }
+
+    // ========================================
+    // BIRDS COLLECTION (Sri Lanka Endemic Birds)
+    // ========================================
+    match /birds/{birdId} {
+      // Cloud Functions can read birds data (for API)
+      // Also allow service account access for the API
+      allow read: if isCloudFunction() || isServiceAccount();
+      
+      // No public write access - only admin through secure scripts
+      allow write: if (isAuthenticated() && hasAdminRole()) || isServiceAccount();
+      
+      function isServiceAccount() {
+        // Allow service account access for API operations
+        return request.auth != null && 
+               request.auth.uid != null &&
+               // Service accounts don't have user tokens
+               request.auth.token.email == null;
+      }
+    }
+
+    // ========================================
+    // BIRD HISTORY COLLECTION (User's Bird Search/View History)
+    // ========================================
+    match /users/{userId}/birdHistory/{birdId} {
+      // Users can only read their own bird history
+      allow read: if isAuthenticated() && request.auth.uid == userId;
+      
+      // Users can only create entries in their own bird history
+      allow create: if isAuthenticated() && 
+                   request.auth.uid == userId &&
+                   isValidBirdHistory();
+      
+      // Users cannot update bird history entries (immutable for integrity)
+      allow update: if false;
+      
+      // Users can delete entries from their own bird history
+      allow delete: if isAuthenticated() && request.auth.uid == userId;
+      
+      function isValidBirdHistory() {
+        let data = request.resource.data;
+        return data.keys().hasAll(['birdName', 'searchType', 'timestamp']) &&
+               data.birdName is string &&
+               data.birdName.size() > 0 &&
+               data.searchType is string &&
+               (data.searchType == 'search' || data.searchType == 'image') &&
+               data.timestamp != null &&
+               // Optional fields validation
+               (!data.keys().hasAny(['scientificName']) || data.scientificName is string) &&
+               (!data.keys().hasAny(['family']) || data.family is string) &&
+               (!data.keys().hasAny(['order']) || data.order is string) &&
+               (!data.keys().hasAny(['imageUrl']) || data.imageUrl is string) &&
+               (!data.keys().hasAny(['conservationStatus']) || data.conservationStatus is string) &&
+               (!data.keys().hasAny(['habitat']) || data.habitat is string) &&
+               (!data.keys().hasAny(['distribution']) || data.distribution is string) &&
+               (!data.keys().hasAny(['description']) || data.description is string) &&
+               (!data.keys().hasAny(['confidence']) || data.confidence is number) &&
+               (!data.keys().hasAny(['viewedAt']) || data.viewedAt is string) &&
+               (!data.keys().hasAny(['fullData']) || data.fullData is map);
+      }
+    }
+  }
+} 

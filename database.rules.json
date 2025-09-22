@@ -1,0 +1,71 @@
+{
+  "rules": {
+    "conversations": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      "$conversationId": {
+        ".read": "auth != null && (!data.exists() || data.child('participants').child(auth.uid).exists())",
+        ".write": "auth != null && ((!data.exists() && newData.child('participants').child(auth.uid).exists()) || (data.exists() && data.child('participants').child(auth.uid).exists()))",
+        ".validate": "newData.hasChildren(['participants', 'participantDetails', 'createdAt', 'updatedAt', 'unreadCount'])",
+        "participants": {
+          "$userId": {
+            ".validate": "newData.isBoolean() && newData.val() == true"
+          }
+        },
+        "participantDetails": {
+          "$userId": {
+            ".validate": "newData.hasChildren(['uid', 'username', 'displayName']) && newData.child('uid').isString() && newData.child('username').isString() && newData.child('displayName').isString()"
+          }
+        },
+        "lastMessage": {
+          ".validate": "newData.hasChildren(['content', 'senderId', 'timestamp', 'type']) && newData.child('content').isString() && newData.child('senderId').isString() && newData.child('type').isString()"
+        },
+        "createdAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "updatedAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "unreadCount": {
+          "$userId": {
+            ".validate": "newData.isNumber()"
+          }
+        }
+      }
+    },
+    "messages": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      "$conversationId": {
+        ".read": "auth != null && root.child('conversations').child($conversationId).child('participants').child(auth.uid).exists()",
+        "$messageId": {
+          ".write": "auth != null && ((!data.exists() && newData.child('senderId').val() == auth.uid && root.child('conversations').child($conversationId).child('participants').child(auth.uid).exists()) || (data.exists() && root.child('conversations').child($conversationId).child('participants').child(auth.uid).exists()))",
+          ".validate": "newData.hasChildren(['id', 'conversationId', 'senderId', 'content', 'type', 'timestamp', 'readBy'])",
+          "id": {
+            ".validate": "newData.isString()"
+          },
+          "conversationId": {
+            ".validate": "newData.isString() && newData.val() == $conversationId"
+          },
+          "senderId": {
+            ".validate": "newData.isString()"
+          },
+          "content": {
+            ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 2000"
+          },
+          "type": {
+            ".validate": "newData.isString() && (newData.val() == 'text' || newData.val() == 'image' || newData.val() == 'file')"
+          },
+          "timestamp": {
+            ".validate": "newData.isNumber()"
+          },
+          "readBy": {
+            "$userId": {
+              ".validate": "newData.isBoolean()"
+            }
+          }
+        }
+      }
+    }
+  }
+} 
