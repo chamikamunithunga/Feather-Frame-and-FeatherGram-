@@ -1,0 +1,324 @@
+/* Google Fonts moved to index.html to avoid construct-stylesheets @import issue */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+  padding-top: 12vh; /* Account for fixed navbar */
+  min-height: 100vh;
+}
+
+/* Remove any extra spacing after footer */
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure footer is at the bottom with no extra space */
+footer {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.legal {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Remove any spacing after the last footer element */
+footer + *,
+.legal + * {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Ensure no extra space at the bottom of the page */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  height: 100%;
+  scroll-behavior: smooth; /* Enable smooth scrolling for anchor links */
+}
+
+/* Remove any bottom margin or padding from the root element */
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure main content area grows to fill available space */
+main {
+  flex-grow: 1;
+}
+
+/* Remove bottom spacing from all pages */
+* {
+  margin-bottom: 0;
+}
+
+*:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Remove bottom spacing from all page components */
+div, section, article, main, aside, nav, header {
+  margin-bottom: 0;
+}
+
+/* Ensure no extra space after the last element on any page */
+body > *:last-child,
+#root > *:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Remove any default margins from page sections */
+.container:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Fix any potential spacing issues from React Router */
+.router-container,
+.route-container {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Mobile-specific fixes for white space */
+@media screen and (max-width: 768px) {
+  body {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+  }
+  
+  #root {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  
+  footer, .legal {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+}
+
+/* Fix for iOS Safari viewport issues */
+@supports (-webkit-touch-callout: none) {
+  body {
+    min-height: -webkit-fill-available;
+  }
+  
+  #root {
+    min-height: -webkit-fill-available;
+  }
+}
+.container {
+  max-width: 80%;
+  margin: auto;
+}
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+a {
+  text-decoration: none;
+  color: #000;
+  text-transform: capitalize;
+}
+ul {
+  list-style-type: none;
+}
+.sign-in-btn {
+  border-radius: 5px;
+  padding: 17px 30px;
+  background: #27ae60;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button {
+  border-radius: 5px;
+  padding: 17px 30px;
+  background: #27ae60;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button i {
+  margin-right: 5px;
+}
+.heading {
+  text-align: center;
+  width: 60%;
+  margin: auto;
+}
+.heading h1 {
+  color: #2d3954;
+  font-weight: 600;
+  text-transform: capitalize;
+  font-size: 35px;
+}
+.heading p {
+  color: #72809d;
+}
+textarea,
+input {
+  border: none;
+  outline: none;
+  background: none;
+}
+.background {
+  padding: 80px 0;
+  position: relative;
+  background: #f7f9fc;
+}
+
+.grid5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 30px;
+}
+label {
+  color: #2d3954;
+  font-size: 14px;
+}
+.mtop {
+  margin-top: 50px;
+}
+h4 {
+  font-weight: 500;
+  margin-top: 10px;
+}
+.shadow {
+  box-shadow: 0 0 20px 0 rgb(112 121 138 / 18%);
+}
+.padding {
+  padding: 80px 0;
+}
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 30px;
+}
+img {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.btn2 {
+  border-radius: 50px;
+  font-size: 20px;
+}
+.grid4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 30px;
+}
+.btn3 {
+  background: #ff6922;
+  border-radius: 50px;
+}
+.btn4 {
+  background-color: #000;
+  color: #fff;
+}
+.btn5 {
+  border-radius: 50px;
+  padding: 20px 40px;
+  color: #27ae60;
+  font-size: 20px;
+  font-weight: 400;
+  border: 5px solid #27ae601f;
+  background: #fff;
+}
+.back {
+  height: 40vh;
+  position: relative;
+}
+.back img {
+  height: 40vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  object-fit: cover;
+}
+.back::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40vh;
+  background: rgba(17, 40, 72, 0.629);
+  z-index: -1;
+}
+.back .container {
+  color: #ffffff;
+  padding: 120px 0;
+}
+
+/* Move contact page text up */
+.contact-page .back .container {
+  padding: 50px 0 120px 0;
+}
+
+/* Move blog page text much higher up */
+.blog-out .back .container {
+  padding: 20px 0 120px 0;
+}
+
+/* Move about page text much higher up */
+.about .back .container {
+  padding: 40px 0 140px 0;
+}
+.back h1 {
+  font-size: 40px;
+  font-weight: 500;
+}
+.mb {
+  margin-bottom: 80px;
+}
+@media screen and (max-width: 800px) {
+  .grid4,
+  .grid3,
+  .grid5 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .heading {
+    width: 100%;
+  }
+  .container {
+    max-width: 90%;
+  }
+  .back::after,
+  .back img,
+  .back {
+    height: 30vh;
+  }
+}
+
+
+
+
